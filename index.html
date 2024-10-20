@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he-IL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>הקראוון - רשת אולפני קצה שיתופיים | חוויית הקלטה ייחודית</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&family=Rubik:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #ff6b35;
+        --secondary-color: #2c3e50;
+        --accent-color: #4ecdc4;
+        --text-color: #333;
+        --light-bg: #f8f9fa;
+        --dark-bg: #1a1a1a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Heebo", sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--light-bg);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        background-color: rgba(28, 28, 28, 0.9);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: background-color 0.3s ease;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+
+      .logo {
+        width: 100px;
+        height: 100px;
+        height: auto;
+        transition: transform 0.3s ease;
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-left: 30px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      nav ul li a::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--primary-color);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      nav ul li a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .hero {
+        background-image: url("https://pfxoibsalklhbdpezysw.supabase.co/storage/v1/object/public/ddd/DSC01435-scaled.webp");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        color: #fff;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .hero h1 {
+        font-family: "Rubik", sans-serif;
+        font-size: 4rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero p {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .cta-button {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: #fff;
+        padding: 15px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .cta-button:hover {
+        background-color: #ff8c5a;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .section {
+        padding: 100px 0;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+        color: var(--secondary-color);
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 50px;
+        height: 3px;
+        background-color: var(--primary-color);
+        margin: 20px auto 0;
+      }
+
+      .about-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 50px;
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-image {
+        flex: 1;
+        position: relative;
+      }
+
+      .about-image img {
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-image::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: 20px;
+        bottom: 20px;
+        border: 2px solid var(--accent-color);
+        border-radius: 10px;
+        z-index: -1;
+      }
+
+      .studios-grid,
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .studio-card,
+      .service-card {
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .studio-card:hover,
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .studio-image {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+
+      .studio-image::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.3),
+          rgba(0, 0, 0, 0.7)
+        );
+      }
+
+      .studio-content,
+      .service-content {
+        padding: 30px;
+      }
+
+      .studio-content h3,
+      .service-content h3 {
+        color: var(--secondary-color);
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+      }
+
+      .studio-features {
+        list-style: none;
+        padding: 0;
+      }
+
+      .studio-features li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .studio-features li i {
+        color: var(--primary-color);
+        margin-left: 10px;
+      }
+
+      .service-icon {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
+
+      .equipment-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        list-style: none;
+      }
+
+      .equipment-item {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .equipment-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .equipment-icon {
+        font-size: 2rem;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+      }
+
+      .pricing-plans {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+      }
+
+      .pricing-plan {
+        flex: 1;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 40px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .pricing-plan:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .plan-name {
+        font-size: 1.5rem;
+        color: var(--secondary-color);
+        margin-bottom: 20px;
+      }
+
+      .plan-price {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
+
+      .plan-features {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+      }
+
+      .plan-features li {
+        margin-bottom: 10px;
+      }
+
+      .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: var(--secondary-color);
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--accent-color);
+      }
+
+      .form-group textarea {
+        height: 150px;
+        resize: vertical;
+      }
+
+      .submit-button {
+        background-color: var(--primary-color);
+        color: #fff;
+        border: none;
+        padding: 15px 40px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        display: block;
+        width: 100%;
+        font-size: 1.1rem;
+      }
+
+      .submit-button:hover {
+        background-color: #ff8c5a;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      footer {
+        background-color: var(--dark-bg);
+        color: #fff;
+        padding: 60px 0 30px;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+
+      .footer-section {
+        flex: 1;
+        margin-bottom: 30px;
+        min-width: 200px;
+      }
+
+      .footer-section h3 {
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-color);
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 15px;
+      }
+
+      .social-icons a {
+        color: #fff;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .social-icons a:hover {
+        color: var(--primary-color);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+        .header-content {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .menu-toggle {
+          display: block;
+          position: absolute;
+          top: 20px;
+          right: 20px;
+        }
+
+        nav {
+          display: none;
+          width: 100%;
+        }
+
+        nav.active {
+          display: block;
+        }
+
+        nav ul {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        nav ul li {
+          margin: 10px 0;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+        }
+
+        .about-content,
+        .pricing-plans {
+          flex-direction: column;
+        }
+
+        .about-image {
+          order: -1;
+          margin-bottom: 30px;
+        }
+
+        .pricing-plan {
+          margin-bottom: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <img
+            src="https://pfxoibsalklhbdpezysw.supabase.co/storage/v1/object/public/ddd/aaa.png"
+            alt="הקראוון לוגו"
+            class="logo"
+          />
+          <button class="menu-toggle" aria-label="תפריט">
+            <i class="fas fa-bars"></i>
+          </button>
+          <nav>
+            <ul>
+              <li><a href="#about">אודות</a></li>
+              <li><a href="#studios">האולפנים שלנו</a></li>
+              <li><a href="#services">שירותים</a></li>
+              <li><a href="#equipment">ציוד</a></li>
+              <li><a href="#pricing">מחירים</a></li>
+              <li><a href="#contact">צור קשר</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>הקראוון - רשת אולפני קצה שיתופיים</h1>
+          <p>חוויית הקלטה ייחודית בלב הטבע</p>
+        </div>
+        <a href="#contact" class="cta-button">קבע סיור באולפן</a>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">אודותינו</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              ברוכים הבאים לקראוון - רשת אולפני קצה שיתופיים המציעה חוויית הקלטה
+              ייחודית בלב הטבע. האולפנים שלנו, הממוקמים בקראוונים וינטג'
+              מעוצבים, מפוזרים במקומות קסומים ברחבי הארץ.
+            </p>
+            <p>
+              אנו מאמינים שהסביבה היא חלק בלתי נפרד מתהליך היצירה, ולכן יצרנו
+              מרחבים שמאפשרים לכם להתנתק מהמולת היום-יום ולהתחבר לאמנות שלכם.
+            </p>
+            <p>
+              עם ציוד אנלוגי ודיגיטלי מהשורה הראשונה, מיקרופונים איכותיים וצוות
+              מקצועי ומסור, אנו כאן כדי להפוך את החזון המוזיקלי שלכם למציאות.
+            </p>
+          </div>
+          <div class="about-image">
+            <img
+              src="https://pfxoibsalklhbdpezysw.supabase.co/storage/v1/object/public/ddd/DSC01448-1024x576.webp"
+              alt="הקראוון - אולפן הקלטות"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="studios" class="section">
+      <div class="container">
+        <h2 class="section-title">האולפנים שלנו</h2>
+        <div class="studios-grid">
+          <div class="studio-card">
+            <div
+              class="studio-image"
+              style="
+                background-image: url('https://pfxoibsalklhbdpezysw.supabase.co/storage/v1/object/public/ddd/DSC01298-scaled.webp');
+              "
+            ></div>
+            <div class="studio-content">
+              <h3>הקראוון בחורשה</h3>
+              <ul class="studio-features">
+                <li><i class="fas fa-tree"></i> ממוקם בלב חורשה קסומה</li>
+                <li><i class="fas fa-music"></i> חדר הקלטות ראשי</li>
+                <li><i class="fas fa-couch"></i> אזור אירוח נעים</li>
+                <li><i class="fas fa-wifi"></i> אינטרנט מהיר</li>
+              </ul>
+            </div>
+          </div>
+          <div class="studio-card">
+            <div
+              class="studio-image"
+              style="
+                background-image: url('https://pfxoibsalklhbdpezysw.supabase.co/storage/v1/object/public/ddd/DSC01353-scaled.webp');
+              "
+            ></div>
+            <div class="studio-content">
+              <h3>הקראוון על החוף</h3>
+              <ul class="studio-features">
+                <li><i class="fas fa-water"></i> נוף מרהיב לים</li>
+                <li><i class="fas fa-drum"></i> חדר תופים אקוסטי</li>
+                <li><i class="fas fa-guitar"></i> מבחר כלי נגינה</li>
+                <li><i class="fas fa-coffee"></i> פינת קפה מפנקת</li>
+              </ul>
+            </div>
+          </div>
+          <div class="studio-card">
+            <div
+              class="studio-image"
+              style="
+                background-image: url('https://source.unsplash.com/600x400/?recording-studio,mountain');
+              "
+            ></div>
+            <div class="studio-content">
+              <h3>הקראוון בהר</h3>
+              <ul class="studio-features">
+                <li><i class="fas fa-mountain"></i> תצפית פנורמית</li>
+                <li><i class="fas fa-microphone"></i> חדר ווקאלים מבודד</li>
+                <li><i class="fas fa-laptop"></i> עמדת עריכה מתקדמת</li>
+                <li><i class="fas fa-bed"></i> אפשרות ללינה</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="booking-section" class="section">
+      <div class="container">
+        <h2 class="section-title">הזמנת אולפן</h2>
+        <div class="booking-container">
+          <div class="booking-header">
+            <select id="studioSelect" class="studio-select">
+              <option value="">בחר אולפן</option>
+            </select>
+            <div class="view-toggle">
+              <button id="weekViewBtn" class="active">שבוע</button>
+              <button id="monthViewBtn">חודש</button>
+            </div>
+            <div class="calendar-nav">
+              <button id="prevButton">&lt;</button>
+              <span id="currentDate"></span>
+              <button id="nextButton">&gt;</button>
+            </div>
+          </div>
+          <div id="calendar" class="calendar"></div>
+        </div>
+        <div id="selectedSlotsInfo" class="selected-slots-info">
+          <h3>שעות נבחרות:</h3>
+          <div id="selectedHours"></div>
+
+          <button id="bookSelectedSlots" class="cta-button">
+            הזמן שעות נבחרות
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div id="bookingPopup" class="popup">
+      <div class="popup-content">
+        <h3>אישור הזמנה</h3>
+        <p>שעות נבחרות:</p>
+        <div id="selectedHours"></div>
+
+        <p>מחיר כולל: <span id="totalPrice"></span> ₪</p>
+        <input
+          type="email"
+          id="userEmail"
+          placeholder="הכנס את האימייל שלך"
+          required
+        />
+        <input
+          type="tel"
+          id="userPhone"
+          placeholder="הכנס את מספר הטלפון שלך"
+          required
+        />
+        <button id="sendVerification">שלח קוד אימות</button>
+        <div id="verificationSection" style="display: none">
+          <input
+            type="text"
+            id="verificationCode"
+            placeholder="הכנס את קוד האימות"
+          />
+          <button id="verifyCode">אמת קוד</button>
+        </div>
+        <button id="confirmBooking" style="display: none">אשר הזמנה</button>
+        <button id="cancelBooking">ביטול</button>
+      </div>
+    </div>
+    <section id="services" class="section">
+      <div class="container">
+        <h2 class="section-title">השירותים שלנו</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-content">
+              <div class="service-icon"><i class="fas fa-clock"></i></div>
+              <h3>השכרת אולפן לפי שעה</h3>
+              <p>
+                השכירו את האולפן לפי שעה ותיהנו ממרחב יצירה מקצועי בדיוק כשאתם
+                זקוקים לו. גמישות מלאה בשעות הפעילות.
+              </p>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-content">
+              <div class="service-icon"><i class="fas fa-sliders-h"></i></div>
+              <h3>הקלטה ומיקס מקצועי</h3>
+              <p>
+                צוות המהנדסים המקצועי שלנו יעבוד איתכם כדי להביא את הסאונד שלכם
+                לשלמות, עם תשומת לב לכל פרט.
+              </p>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-content">
+              <div class="service-icon"><i class="fas fa-podcast"></i></div>
+              <h3>הפקת פודקאסטים</h3>
+              <p>
+                הקראוון הוא המקום המושלם להקלטת הפודקאסט שלכם. נספק את כל הציוד
+                הנדרש ונסייע בעריכה ובהפצה.
+              </p>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-content">
+              <div class="service-icon"><i class="fas fa-guitar"></i></div>
+              <h3>השכרת כלי נגינה</h3>
+              <p>
+                שכחתם כלי? אין בעיה! אנו מציעים מגוון רחב של כלי נגינה איכותיים
+                להשכרה במהלך הסשן שלכם.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      const selectedSlotsList = document.getElementById("selectedSlotsList");
+      this.selectedSlots.forEach((slot) => {
+        const li = document.createElement("li");
+        li.textContent = `${new Date(slot.date).toLocaleDateString(
+          "he-IL"
+        )} ${slot.start_time.slice(0, 5)} - ${slot.end_time.slice(0, 5)}`;
+        selectedSlotsList.appendChild(li);
+      });
+      this.bookSelectedSlotsBtn.style.display =
+        this.selectedSlots.length > 0 ? "block" : "none";
+    </script>
+    <section id="equipment" class="section">
+      <div class="container">
+        <h2 class="section-title">הציוד שלנו</h2>
+        <ul class="equipment-list">
+          <li class="equipment-item">
+            <div class="equipment-icon"><i class="fas fa-microphone"></i></div>
+            <h3>מיקרופונים</h3>
+            <p>Neumann U87, Shure SM7B, AKG C414, ועוד</p>
+          </li>
+          <li class="equipment-item">
+            <div class="equipment-icon"><i class="fas fa-hdd"></i></div>
+            <h3>ממשקי אודיו</h3>
+            <p>Universal Audio Apollo, Focusrite Clarett</p>
+          </li>
+          <li class="equipment-item">
+            <div class="equipment-icon"><i class="fas fa-sliders-h"></i></div>
+            <h3>מיקסרים</h3>
+            <p>SSL SiX, Neve 5060 Centerpiece</p>
+          </li>
+          <li class="equipment-item">
+            <div class="equipment-icon"><i class="fas fa-headphones"></i></div>
+            <h3>אוזניות</h3>
+            <p>Sennheiser HD600, Beyerdynamic DT 770 Pro</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <div class="container">
+        <h2 class="section-title">מחירים</h2>
+        <div class="pricing-plans">
+          <div class="pricing-plan">
+            <h3 class="plan-name">חבילה בסיסית</h3>
+            <p class="plan-price">₪200 / שעה</p>
+            <ul class="plan-features">
+              <li>שימוש באולפן</li>
+              <li>מהנדס סאונד</li>
+              <li>ציוד בסיסי</li>
+              <li>עד 2 משתתפים</li>
+            </ul>
+            <a href="#contact" class="cta-button">הזמן עכשיו</a>
+          </div>
+          <div class="pricing-plan">
+            <h3 class="plan-name">חבילה מקצועית</h3>
+            <p class="plan-price">₪350 / שעה</p>
+            <ul class="plan-features">
+              <li>שימוש באולפן</li>
+              <li>מהנדס סאונד בכיר</li>
+              <li>ציוד מתקדם</li>
+              <li>עד 5 משתתפים</li>
+              <li>עריכה בסיסית</li>
+            </ul>
+            <a href="#contact" class="cta-button">הזמן עכשיו</a>
+          </div>
+          <div class="pricing-plan">
+            <h3 class="plan-name">חבילת פרימיום</h3>
+            <p class="plan-price">₪500 / שעה</p>
+            <ul class="plan-features">
+              <li>שימוש באולפן</li>
+              <li>מהנדס ומפיק מוזיקלי</li>
+              <li>כל הציוד כולל כלי נגינה</li>
+              <li>ללא הגבלת משתתפים</li>
+              <li>עריכה ומיקס מלא</li>
+              <li>קליפ וידאו של הסשן</li>
+            </ul>
+            <a href="#contact" class="cta-button">הזמן עכשיו</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title">צור קשר</h2>
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name">שם מלא</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">אימייל</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">טלפון</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+          <div class="form-group">
+            <label for="studio">בחר אולפן</label>
+            <select id="studio" name="studio" required>
+              <option value="">בחר אולפן</option>
+              <option value="forest">הקראוון בחורשה</option>
+              <option value="beach">הקראוון על החוף</option>
+              <option value="mountain">הקראוון בהר</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">הודעה</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="submit-button">שלח הודעה</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>הקראוון</h3>
+            <p>רשת אולפני קצה שיתופיים המציעה חוויית הקלטה ייחודית בלב הטבע.</p>
+          </div>
+          <div class="footer-section">
+            <h3>קישורים מהירים</h3>
+            <ul class="footer-links">
+              <li><a href="#about">אודות</a></li>
+              <li><a href="#studios">האולפנים שלנו</a></li>
+              <li><a href="#services">שירותים</a></li>
+              <li><a href="#pricing">מחירים</a></li>
+              <li><a href="#contact">צור קשר</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>צור קשר</h3>
+            <p>טלפון: 054-1234567</p>
+            <p>אימייל: info@thecaravan.co.il</p>
+          </div>
+          <div class="footer-section">
+            <h3>עקבו אחרינו</h3>
+            <div class="social-icons">
+              <a href="#" aria-label="פייסבוק"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" aria-label="אינסטגרם"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="טוויטר"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="יוטיוב"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2024 הקראוון - רשת אולפני קצה שיתופיים. כל הזכויות שמורות.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // תפריט נייד
+      const menuToggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector("nav");
+
+      menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+      });
+
+      // סגירת תפריט נייד בעת לחיצה על קישור
+      const navLinks = document.querySelectorAll("nav ul li a");
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("active");
+        });
+      });
+
+      // גלילה חלקה לקישורים פנימיים
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // אנימציית כניסה לאלמנטים
+      function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+
+        for (var i = 0; i < reveals.length; i++) {
+          var windowHeight = window.innerHeight;
+          var elementTop = reveals[i].getBoundingClientRect().top;
+          var elementVisible = 150;
+
+          if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+          } else {
+            reveals[i].classList.remove("active");
+          }
+        }
+      }
+
+      window.addEventListener("scroll", reveal);
+
+      // טיפול בשליחת טופס
+      const contactForm = document.querySelector(".contact-form");
+
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // כאן תוכל להוסיף קוד לטיפול בשליחת הטופס, כגון שליחה לשרת או הצגת הודעת אישור
+        alert("תודה שפנית אלינו! נחזור אליך בהקדם.");
+        contactForm.reset();
+      });
+
+      // אפקט הצללה לתפריט בעת גלילה
+      window.addEventListener("scroll", () => {
+        const header = document.querySelector("header");
+        header.classList.toggle("scrolled", window.scrollY > 0);
+      });
+    </script>
+
+    <style>
+      :root {
+        --primary-color: #4a90e2;
+        --secondary-color: #f39c12;
+        --text-color: #333;
+        --background-color: #f4f4f4;
+      }
+
+      body {
+        font-family: "Heebo", sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--background-color);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .booking-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+
+      .booking-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+
+      .studio-select {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 200px;
+      }
+
+      .view-toggle button,
+      .calendar-nav button {
+        background: none;
+        border: none;
+        color: #fff;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: opacity 0.3s;
+      }
+
+      .view-toggle button.active {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+
+      .calendar {
+        display: grid;
+        gap: 1px;
+        background-color: #e0e0e0;
+      }
+
+      .calendar.week-view {
+        grid-template-columns: repeat(7, 1fr);
+      }
+
+      .calendar.month-view {
+        grid-template-columns: repeat(7, 1fr);
+      }
+      #selectedHours {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        font-size: 0.9em;
+      }
+      .calendar-day {
+        background-color: #fff;
+        min-height: 100px;
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+
+      .calendar-day .date {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .calendar-day .slots {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .time-slot {
+        background-color: var(--secondary-color);
+        color: #fff;
+        padding: 5px;
+        border-radius: 3px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+      }
+
+      .time-slot:hover {
+        background-color: var(--primary-color);
+      }
+
+      .time-slot.selected {
+        background-color: var(--primary-color);
+      }
+
+      .time-slot.booked {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      .time-slot-checkbox {
+        margin-right: 5px;
+      }
+
+      .selected-slots-info {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .selected-slots-info h3 {
+        margin-bottom: 10px;
+      }
+
+      .selected-slots-info ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .selected-slots-info li {
+        margin-bottom: 5px;
+        padding: 5px;
+        background-color: #f0f0f0;
+        border-radius: 3px;
+      }
+
+      .cta-button {
+        background-color: var(--primary-color);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: 10px;
+        transition: background-color 0.3s;
+      }
+
+      .cta-button:hover {
+        background-color: #3a7abd;
+      }
+
+      .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .popup-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 400px;
+        width: 90%;
+      }
+
+      .popup-content input,
+      .popup-content button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+      }
+
+      .popup-content button {
+        background-color: var(--primary-color);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .popup-content button:hover {
+        background-color: #3a7abd;
+      }
+
+      @media (max-width: 768px) {
+        .booking-header {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .studio-select {
+          max-width: 100%;
+        }
+
+        .calendar.week-view,
+        .calendar.month-view {
+          grid-template-columns: repeat(1, 1fr);
+        }
+
+        .calendar-day {
+          min-height: auto;
+        }
+
+        .time-slot {
+          font-size: 0.7rem;
+        }
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+      class BookingSystem {
+        constructor(supabaseUrl, supabaseKey) {
+          this.supabase = supabase.createClient(supabaseUrl, supabaseKey);
+          this.currentDate = new Date();
+          this.currentView = "week";
+          this.selectedStudio = null;
+          this.selectedSlots = [];
+          this.initElements();
+          this.addEventListeners();
+          this.loadStudios();
+          this.updateCalendar();
+        }
+
+        initElements() {
+          this.studioSelect = document.getElementById("studioSelect");
+          this.calendar = document.getElementById("calendar");
+          this.currentDateSpan = document.getElementById("currentDate");
+          this.prevButton = document.getElementById("prevButton");
+          this.nextButton = document.getElementById("nextButton");
+          this.weekViewBtn = document.getElementById("weekViewBtn");
+          this.monthViewBtn = document.getElementById("monthViewBtn");
+          this.selectedSlotsList = document.getElementById("selectedSlotsList");
+          this.bookSelectedSlotsBtn =
+            document.getElementById("bookSelectedSlots");
+          this.bookingPopup = document.getElementById("bookingPopup");
+          this.selectedHoursSpan = document.getElementById("selectedHours");
+          this.totalPriceSpan = document.getElementById("totalPrice");
+          this.userEmailInput = document.getElementById("userEmail");
+          this.userPhoneInput = document.getElementById("userPhone");
+          this.sendVerificationButton =
+            document.getElementById("sendVerification");
+          this.verificationSection = document.getElementById(
+            "verificationSection"
+          );
+          this.verificationCodeInput =
+            document.getElementById("verificationCode");
+          this.verifyCodeButton = document.getElementById("verifyCode");
+          this.confirmBookingButton = document.getElementById("confirmBooking");
+          this.cancelBookingButton = document.getElementById("cancelBooking");
+        }
+
+        addEventListeners() {
+          this.studioSelect.addEventListener(
+            "change",
+            this.handleStudioChange.bind(this)
+          );
+          this.prevButton.addEventListener("click", () => this.changeDate(-1));
+          this.nextButton.addEventListener("click", () => this.changeDate(1));
+          this.weekViewBtn.addEventListener("click", () =>
+            this.setView("week")
+          );
+          this.monthViewBtn.addEventListener("click", () =>
+            this.setView("month")
+          );
+          this.bookSelectedSlotsBtn.addEventListener(
+            "click",
+            this.openPopup.bind(this)
+          );
+          this.sendVerificationButton.addEventListener(
+            "click",
+            this.sendVerificationCode.bind(this)
+          );
+          this.verifyCodeButton.addEventListener(
+            "click",
+            this.verifyCode.bind(this)
+          );
+          this.confirmBookingButton.addEventListener(
+            "click",
+            this.confirmBooking.bind(this)
+          );
+          this.cancelBookingButton.addEventListener(
+            "click",
+            this.closePopup.bind(this)
+          );
+        }
+
+        async loadStudios() {
+          try {
+            const { data, error } = await this.supabase
+              .from("studios")
+              .select("id, name");
+            if (error) throw error;
+
+            const options = data
+              .map(
+                (studio) =>
+                  `<option value="${studio.id}">${studio.name}</option>`
+              )
+              .join("");
+            this.studioSelect.innerHTML =
+              '<option value="">בחר אולפן</option>' + options;
+          } catch (error) {
+            console.error("Error loading studios:", error);
+            this.showError("אירעה שגיאה בטעינת האולפנים. אנא נסה שנית.");
+          }
+        }
+
+        async loadAvailability() {
+          if (!this.selectedStudio) return;
+
+          const startDate =
+            this.currentView === "week"
+              ? this.getStartOfWeek(this.currentDate)
+              : this.getStartOfMonth(this.currentDate);
+          const endDate =
+            this.currentView === "week"
+              ? this.getEndOfWeek(this.currentDate)
+              : this.getEndOfMonth(this.currentDate);
+
+          try {
+            const { data, error } = await this.supabase.rpc(
+              "check_availability_range",
+              {
+                p_studio_id: this.selectedStudio,
+                p_start_date: startDate.toISOString().split("T")[0],
+                p_end_date: endDate.toISOString().split("T")[0],
+              }
+            );
+
+            if (error) throw error;
+            this.updateCalendar(data);
+          } catch (error) {
+            console.error("Error loading availability:", error);
+            this.showError("אירעה שגיאה בטעינת הזמינות. אנא נסה שנית.");
+          }
+        }
+
+        updateCalendar(availabilityData = []) {
+          this.calendar.innerHTML = "";
+          this.currentDateSpan.textContent = this.formatDateRange();
+          this.calendar.className = `calendar ${this.currentView}-view`;
+
+          const startDate =
+            this.currentView === "week"
+              ? this.getStartOfWeek(this.currentDate)
+              : this.getStartOfMonth(this.currentDate);
+          const daysToShow =
+            this.currentView === "week"
+              ? 7
+              : this.getDaysInMonth(this.currentDate);
+
+          for (let i = 0; i < daysToShow; i++) {
+            const date = new Date(startDate);
+            date.setDate(startDate.getDate() + i);
+            if (
+              this.currentView === "week" &&
+              (date.getDay() === 5 || date.getDay() === 6)
+            )
+              continue; // Skip Friday and Saturday for week view
+            const dayElement = this.createDayElement(date, availabilityData);
+            this.calendar.appendChild(dayElement);
+          }
+        }
+
+        createDayElement(date, availabilityData) {
+          const dayElement = document.createElement("div");
+          dayElement.className = "calendar-day";
+          dayElement.innerHTML = `
+      <div class="date">${date.toLocaleDateString("he-IL", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+      })}</div>
+      <div class="slots"></div>
+    `;
+
+          const slotsContainer = dayElement.querySelector(".slots");
+          const dayAvailability = availabilityData.filter(
+            (slot) => new Date(slot.date).toDateString() === date.toDateString()
+          );
+
+          if (
+            date.getDay() !== 5 &&
+            date.getDay() !== 6 &&
+            date >= new Date().setHours(0, 0, 0, 0)
+          ) {
+            for (let hour = 9; hour < 23; hour++) {
+              const slotElement = document.createElement("div");
+              slotElement.className = "time-slot";
+
+              const checkbox = document.createElement("input");
+              checkbox.type = "checkbox";
+              checkbox.className = "time-slot-checkbox";
+              slotElement.appendChild(checkbox);
+
+              const timeLabel = document.createElement("span");
+              timeLabel.textContent = `${hour
+                .toString()
+                .padStart(2, "0")}:00 - ${(hour + 1)
+                .toString()
+                .padStart(2, "0")}:00`;
+              slotElement.appendChild(timeLabel);
+
+              const slot = dayAvailability.find((s) =>
+                s.start_time.startsWith(`${hour.toString().padStart(2, "0")}:`)
+              );
+              if (slot) {
+                slotElement.dataset.id = slot.id;
+                if (slot.is_booked) {
+                  slotElement.classList.add("booked");
+                  checkbox.disabled = true;
+                } else {
+                  checkbox.addEventListener("change", () =>
+                    this.toggleSlotSelection(checkbox, slot)
+                  );
+                }
+              }
+
+              slotsContainer.appendChild(slotElement);
+            }
+          }
+
+          return dayElement;
+        }
+
+        toggleSlotSelection(checkbox, slot) {
+          if (checkbox.checked) {
+            this.selectedSlots.push(slot);
+          } else {
+            this.selectedSlots = this.selectedSlots.filter(
+              (s) => s.id !== slot.id
+            );
+          }
+          this.updateSelectedSlotsList();
+        }
+
+        updateSelectedSlotsList() {
+          this.selectedSlotsList.innerHTML = "";
+          this.selectedSlots.sort(
+            (a, b) =>
+              new Date(a.date + "T" + a.start_time) -
+              new Date(b.date + "T" + b.start_time)
+          );
+          this.selectedSlots.forEach((slot) => {
+            const li = document.createElement("li");
+            li.textContent = `${new Date(slot.date).toLocaleDateString(
+              "he-IL"
+            )} ${slot.start_time.slice(0, 5)} - ${slot.end_time.slice(0, 5)}`;
+            this.selectedSlotsList.appendChild(li);
+          });
+          this.bookSelectedSlotsBtn.style.display =
+            this.selectedSlots.length > 0 ? "block" : "none";
+        }
+
+        openPopup() {
+          const selectedHoursElement = document.getElementById("selectedHours");
+          selectedHoursElement.textContent = this.formatSelectedHours();
+          this.selectedHoursSpan.textContent = this.formatSelectedHours();
+          this.totalPriceSpan.textContent = this.calculateTotalPrice();
+          this.bookingPopup.style.display = "flex";
+        }
+
+        closePopup() {
+          this.bookingPopup.style.display = "none";
+          this.selectedSlots = [];
+          this.updateSelectedSlotsList();
+          this.updateCalendar();
+        }
+
+        formatSelectedHours() {
+          return this.selectedSlots
+            .map(
+              (slot) =>
+                `${new Date(slot.date).toLocaleDateString(
+                  "he-IL"
+                )} ${slot.start_time.slice(0, 5)} - ${slot.end_time.slice(
+                  0,
+                  5
+                )}`
+            )
+            .join(", ");
+        }
+
+        calculateTotalPrice() {
+          const pricePerHour = 100; // Assume a fixed price per hour
+          return this.selectedSlots.length * pricePerHour;
+        }
+
+        async sendVerificationCode() {
+          const email = this.userEmailInput.value;
+          const phone = this.userPhoneInput.value;
+
+          if (!email || !phone) {
+            this.showError("נא להזין אימייל ומספר טלפון");
+            return;
+          }
+
+          // Here you would typically send the verification code via email and SMS
+          // For this example, we'll just simulate it
+          this.showSuccess("קוד אימות נשלח לאימייל ולטלפון שלך");
+          this.verificationSection.style.display = "block";
+        }
+
+        async verifyCode() {
+          const code = this.verificationCodeInput.value;
+
+          if (!code) {
+            this.showError("נא להזין את קוד האימות");
+            return;
+          }
+
+          // Here you would typically verify the code
+          // For this example, we'll just simulate it
+          this.showSuccess("הקוד אומת בהצלחה");
+          this.confirmBookingButton.style.display = "block";
+        }
+
+        async confirmBooking() {
+          try {
+            // Here you would typically save the booking to your database
+            // For this example, we'll just simulate it
+            this.showSuccess("ההזמנה אושרה בהצלחה!");
+            this.closePopup();
+          } catch (error) {
+            console.error("Error confirming booking:", error);
+            this.showError("אירעה שגיאה באישור ההזמנה. אנא נסה שנית.");
+          }
+        }
+
+        handleStudioChange(e) {
+          this.selectedStudio = e.target.value;
+          if (this.selectedStudio) {
+            this.loadAvailability();
+          } else {
+            this.updateCalendar();
+          }
+        }
+
+        changeDate(direction) {
+          if (this.currentView === "week") {
+            this.currentDate.setDate(
+              this.currentDate.getDate() + direction * 7
+            );
+          } else {
+            this.currentDate.setMonth(this.currentDate.getMonth() + direction);
+          }
+          this.loadAvailability();
+        }
+
+        setView(view) {
+          this.currentView = view;
+          this.weekViewBtn.classList.toggle("active", view === "week");
+          this.monthViewBtn.classList.toggle("active", view === "month");
+          this.loadAvailability();
+        }
+
+        getStartOfWeek(date) {
+          const d = new Date(date);
+          const day = d.getDay();
+          const diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is Sunday
+          return new Date(d.setDate(diff));
+        }
+
+        getEndOfWeek(date) {
+          const d = new Date(date);
+          const day = d.getDay();
+          const diff = d.getDate() - day + 7; // add 7 to get to the end of the week
+          return new Date(d.setDate(diff));
+        }
+
+        getStartOfMonth(date) {
+          return new Date(date.getFullYear(), date.getMonth(), 1);
+        }
+
+        getEndOfMonth(date) {
+          return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        }
+
+        getDaysInMonth(date) {
+          return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+        }
+
+        formatDateRange() {
+          if (this.currentView === "week") {
+            const startDate = this.getStartOfWeek(this.currentDate);
+            const endDate = this.getEndOfWeek(this.currentDate);
+            return `${startDate.toLocaleDateString(
+              "he-IL"
+            )} - ${endDate.toLocaleDateString("he-IL")}`;
+          } else {
+            return this.currentDate.toLocaleDateString("he-IL", {
+              year: "numeric",
+              month: "long",
+            });
+          }
+        }
+
+        showError(message) {
+          alert(message); // You can replace this with a more sophisticated error display
+        }
+
+        showSuccess(message) {
+          alert(message); // You can replace this with a more sophisticated success message display
+        }
+      }
+
+      const bookingSystem = new BookingSystem(
+        "https://pfxoibsalklhbdpezysw.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmeG9pYnNhbGtsaGJkcGV6eXN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0NDg0OTUsImV4cCI6MjA0NTAyNDQ5NX0.D5dKf2A6tTDVizHNyM-Lq68riIwzqy7NRpYFQIKlT20"
+      );
+
+      // הערות נוספות לשימוש ושיפור המערכת:
+
+      // 1. ניהול מצב (State Management):
+      // במערכות גדולות יותר, כדאי לשקול שימוש בספריית ניהול מצב כמו Redux או MobX.
+
+      // 2. תמיכה בשפות נוספות:
+      // ניתן להוסיף תמיכה בשפות נוספות על ידי שימוש בקובץ תרגומים.
+
+      // 3. שיפור UX:
+      // הוספת אנימציות ומעברים חלקים יותר יכולה לשפר את חוויית המשתמש.
+
+      // 4. אבטחה:
+      // יש להקפיד על אבטחת ה
+    </script>
+  </body>
+</html>
