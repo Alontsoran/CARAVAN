@@ -19,9 +19,8 @@
       href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/style.css" />
     <!-- סגנונות מותאמים אישית -->
-    <style></style>
   </head>
   <body>
     <!-- כותרת -->
@@ -414,7 +413,9 @@
     <!-- סקריפטים -->
     <!-- קישורים ל-FullCalendar ו-Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <!-- סקריפטים -->
+
     <script>
       // תפריט נייד
       const menuToggle = document.querySelector(".menu-toggle");
@@ -437,20 +438,23 @@
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
-          });
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+            });
+          }
         });
       });
 
       // אנימציית כניסה לאלמנטים
       function reveal() {
-        var reveals = document.querySelectorAll(".reveal");
+        const reveals = document.querySelectorAll(".reveal");
 
-        for (var i = 0; i < reveals.length; i++) {
-          var windowHeight = window.innerHeight;
-          var elementTop = reveals[i].getBoundingClientRect().top;
-          var elementVisible = 150;
+        for (let i = 0; i < reveals.length; i++) {
+          const windowHeight = window.innerHeight;
+          const elementTop = reveals[i].getBoundingClientRect().top;
+          const elementVisible = 150;
 
           if (elementTop < windowHeight - elementVisible) {
             reveals[i].classList.add("active");
@@ -478,7 +482,7 @@
         header.classList.toggle("scrolled", window.scrollY > 0);
       });
 
-      // אתחול מערכת ההזמנות
+      // אתחול מערכת ההזמנות לאחר טעינת הספריות
       document.addEventListener("DOMContentLoaded", function () {
         const bookingSystem = new BookingSystem(
           "https://pfxoibsalklhbdpezysw.supabase.co",
@@ -493,6 +497,7 @@
           this.currentView = "timeGridWeek";
           this.selectedStudio = null;
           this.selectedSlots = [];
+          this.pricePerHour = 200; // מחיר לדוגמה לשעה
           this.initElements();
           this.initCalendar();
           this.addEventListeners();
@@ -535,13 +540,14 @@
             direction: "rtl",
             headerToolbar: false,
             selectable: true,
-            editable: true,
+            editable: false, // האירועים לא יהיו ניתנים לעריכה
             slotMinTime: "09:00:00",
             slotMaxTime: "23:00:00",
             allDaySlot: false,
             select: this.handleTimeSelect.bind(this),
             eventClick: this.handleEventClick.bind(this),
             events: this.fetchEvents.bind(this),
+            eventDisplay: "block",
           });
           this.calendar.render();
           this.updateCurrentDateDisplay();
@@ -632,6 +638,9 @@
               .select("id, name");
             if (error) throw error;
 
+            // איפוס האופציות למניעת כפילויות, שמירה על אופציית "בחר אולפן"
+            this.studioSelect.innerHTML = `<option value="">בחר אולפן</option>`;
+
             const options = data
               .map(
                 (studio) =>
@@ -673,7 +682,11 @@
               end: booking.end_time,
               backgroundColor: this.getEventColor(booking.status),
               borderColor: this.getEventColor(booking.status),
-              editable: booking.status !== "confirmed",
+              editable: false, // האירועים הסגורים לא יהיו ניתנים לעריכה
+              allDay: false,
+              extendedProps: {
+                status: booking.status,
+              },
             }));
             successCallback(events);
           } catch (error) {
@@ -685,39 +698,64 @@
         getEventColor(status) {
           switch (status) {
             case "confirmed":
-              return "#28a745";
+              return "#28a745"; // ירוק
             case "pending":
-              return "#ffc107";
+              return "#ffc107"; // צהוב
             case "cancelled":
-              return "#dc3545";
+              return "#dc3545"; // אדום
             default:
-              return "#6c757d";
+              return "#6c757d"; // אפור
           }
         }
 
         handleTimeSelect(info) {
-          // ניתן להוסיף לוגיקה לבדיקת זמינות
+          // בדיקה אם הלוז הנבחר כבר סגור
+          const overlappingEvents = this.calendar
+            .getEvents()
+            .filter((event) => {
+              return (
+                event.start < info.end &&
+                event.end > info.start &&
+                event.id.startsWith("booking-")
+              );
+            });
+
+          if (overlappingEvents.length > 0) {
+            alert("הזמן הנבחר כבר תפוס. נא לבחור זמן אחר.");
+            this.calendar.unselect();
+            return;
+          }
+
           const confirmBooking = confirm("האם ברצונך להזמין את הזמן הנבחר?");
           if (confirmBooking) {
-            // שמירת המידע עבור הפופאפ
-            this.selectedBookingInfo = {
+            const slot = {
               start: info.start,
               end: info.end,
             };
-            this.selectedSlots.push(this.selectedBookingInfo);
+            this.selectedSlots.push(slot);
             this.updateSelectedSlotsList();
+            this.highlightSelectedSlot(slot.start, slot.end);
           }
           this.calendar.unselect();
         }
 
         handleEventClick(info) {
-          // ניתן להוסיף לוגיקה לטיפול בלחיצה על אירוע
-          alert(`אירוע: ${info.event.title}`);
+          const event = info.event;
+          if (event.extendedProps.status === "confirmed") {
+            alert(`אירוע: ${event.title} - הזמנה מאושרת`);
+          } else if (event.extendedProps.status === "pending") {
+            alert(`אירוע: ${event.title} - הזמנה ממתינה לאישור`);
+          } else if (event.extendedProps.status === "cancelled") {
+            alert(`אירוע: ${event.title} - הזמנה בוטלה`);
+          } else {
+            // אירוע שנבחר על ידי המשתמש לפני אישור
+            alert(`לוז נבחר: ${event.title}`);
+          }
         }
 
         updateSelectedSlotsList() {
           this.selectedSlotsList.innerHTML = "";
-          this.selectedSlots.forEach((slot) => {
+          this.selectedSlots.forEach((slot, index) => {
             const li = document.createElement("li");
             li.textContent = `${slot.start.toLocaleString(
               "he-IL"
@@ -726,6 +764,20 @@
           });
           this.bookSelectedSlotsBtn.style.display =
             this.selectedSlots.length > 0 ? "block" : "none";
+        }
+
+        highlightSelectedSlot(start, end) {
+          // הוספת אירוע זמני לציון הלוז שנבחר
+          this.calendar.addEvent({
+            id: "selected-" + start.toISOString(),
+            title: "לוז נבחר",
+            start: start,
+            end: end,
+            backgroundColor: "#4ecdc4", // צבע אחר להדגשה
+            borderColor: "#4ecdc4",
+            editable: false,
+            allDay: false,
+          });
         }
 
         openPopup() {
@@ -743,13 +795,19 @@
 
         closePopup() {
           this.bookingPopup.style.display = "none";
+          // הסרת הלוזים שנבחרו
+          this.selectedSlots.forEach((slot) => {
+            const eventId = "selected-" + slot.start.toISOString();
+            const event = this.calendar.getEventById(eventId);
+            if (event) event.remove();
+          });
           this.selectedSlots = [];
           this.updateSelectedSlotsList();
           this.calendar.refetchEvents();
         }
 
         calculateTotalPrice() {
-          const pricePerHour = 200; // לדוגמה
+          const pricePerHour = this.pricePerHour; // מחיר לדוגמה לשעה
           let totalHours = 0;
           this.selectedSlots.forEach((slot) => {
             totalHours += (slot.end - slot.start) / (1000 * 60 * 60);
@@ -758,13 +816,13 @@
         }
 
         sendVerificationCode() {
-          // כאן ניתן להוסיף קוד לשליחת קוד אימות
+          // כאן ניתן להוסיף קוד לשליחת קוד אימות באמצעות שירות חיצוני כמו Firebase, Twilio וכו'
           alert("קוד אימות נשלח לאימייל ולמספר הטלפון שהזנת");
           this.verificationSection.style.display = "block";
         }
 
         verifyCode() {
-          // כאן ניתן להוסיף קוד לאימות הקוד
+          // כאן ניתן להוסיף קוד לאימות הקוד שהמשתמש הזין
           alert("הקוד אומת בהצלחה");
           this.confirmBookingButton.style.display = "block";
         }
@@ -784,6 +842,8 @@
               .insert(bookings);
             if (error) throw error;
 
+            // TODO: כאן ניתן להוסיף קוד לסליקת תשלום לפני אישור ההזמנה
+
             alert("ההזמנה אושרה בהצלחה!");
             this.closePopup();
             this.calendar.refetchEvents();
@@ -794,5 +854,6 @@
         }
       }
     </script>
+    <style></style>
   </body>
 </html>
