@@ -4,591 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>הקראוון - רשת אולפני קצה שיתופיים | חוויית הקלטה ייחודית</title>
+    <!-- קישורים לגופנים ו-CSS -->
     <link
       href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&family=Rubik:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <!-- קישורים ל-Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <style>
-      :root {
-        --primary-color: #ff6b35;
-        --secondary-color: #2c3e50;
-        --accent-color: #4ecdc4;
-        --text-color: #333;
-        --light-bg: #f8f9fa;
-        --dark-bg: #1a1a1a;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Heebo", sans-serif;
-        line-height: 1.6;
-        color: var(--text-color);
-        background-color: var(--light-bg);
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-
-      header {
-        background-color: rgba(28, 28, 28, 0.9);
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 1000;
-        transition: background-color 0.3s ease;
-      }
-
-      .header-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 0;
-      }
-
-      .logo {
-        width: 100px;
-        height: 100px;
-        height: auto;
-        transition: transform 0.3s ease;
-      }
-
-      .logo:hover {
-        transform: scale(1.05);
-      }
-
-      nav ul {
-        display: flex;
-        list-style: none;
-      }
-
-      nav ul li {
-        margin-left: 30px;
-      }
-
-      nav ul li a {
-        text-decoration: none;
-        color: #fff;
-        font-weight: bold;
-        transition: color 0.3s ease;
-        position: relative;
-      }
-
-      nav ul li a::after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        bottom: -5px;
-        left: 0;
-        background-color: var(--primary-color);
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-      }
-
-      nav ul li a:hover::after {
-        transform: scaleX(1);
-      }
-
-      .hero {
-        background-image: url("https://pfxoibsalklhbdpezysw.supabase.co/storage/v1/object/public/ddd/DSC01435-scaled.webp");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-      }
-
-      .hero-content {
-        position: relative;
-        z-index: 1;
-        color: #fff;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .hero h1 {
-        font-family: "Rubik", sans-serif;
-        font-size: 4rem;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      }
-
-      .hero p {
-        font-size: 1.5rem;
-        margin-bottom: 30px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-      }
-
-      .cta-button {
-        display: inline-block;
-        background-color: var(--primary-color);
-        color: #fff;
-        padding: 15px 40px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      .cta-button:hover {
-        background-color: #ff8c5a;
-        transform: translateY(-3px);
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-      }
-
-      .section {
-        padding: 100px 0;
-      }
-
-      .section-title {
-        text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 50px;
-        color: var(--secondary-color);
-        position: relative;
-      }
-
-      .section-title::after {
-        content: "";
-        display: block;
-        width: 50px;
-        height: 3px;
-        background-color: var(--primary-color);
-        margin: 20px auto 0;
-      }
-
-      .about-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 50px;
-      }
-
-      .about-text {
-        flex: 1;
-      }
-
-      .about-image {
-        flex: 1;
-        position: relative;
-      }
-
-      .about-image img {
-        max-width: 100%;
-        border-radius: 10px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .about-image::before {
-        content: "";
-        position: absolute;
-        top: -20px;
-        left: -20px;
-        right: 20px;
-        bottom: 20px;
-        border: 2px solid var(--accent-color);
-        border-radius: 10px;
-        z-index: -1;
-      }
-
-      .studios-grid,
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-      }
-
-      .studio-card,
-      .service-card {
-        background-color: #fff;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .studio-card:hover,
-      .service-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-      }
-
-      .studio-image {
-        height: 200px;
-        background-size: cover;
-        background-position: center;
-        position: relative;
-      }
-
-      .studio-image::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.3),
-          rgba(0, 0, 0, 0.7)
-        );
-      }
-
-      .studio-content,
-      .service-content {
-        padding: 30px;
-      }
-
-      .studio-content h3,
-      .service-content h3 {
-        color: var(--secondary-color);
-        margin-bottom: 15px;
-        font-size: 1.5rem;
-      }
-
-      .studio-features {
-        list-style: none;
-        padding: 0;
-      }
-
-      .studio-features li {
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-      }
-
-      .studio-features li i {
-        color: var(--primary-color);
-        margin-left: 10px;
-      }
-
-      .service-icon {
-        font-size: 3rem;
-        color: var(--primary-color);
-        margin-bottom: 20px;
-      }
-
-      .equipment-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-        list-style: none;
-      }
-
-      .equipment-item {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .equipment-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-      }
-
-      .equipment-icon {
-        font-size: 2rem;
-        color: var(--primary-color);
-        margin-bottom: 15px;
-      }
-
-      .pricing-plans {
-        display: flex;
-        justify-content: space-between;
-        gap: 30px;
-      }
-
-      .pricing-plan {
-        flex: 1;
-        background-color: #fff;
-        border-radius: 10px;
-        padding: 40px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .pricing-plan:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-      }
-
-      .plan-name {
-        font-size: 1.5rem;
-        color: var(--secondary-color);
-        margin-bottom: 20px;
-      }
-
-      .plan-price {
-        font-size: 2.5rem;
-        color: var(--primary-color);
-        margin-bottom: 20px;
-      }
-
-      .plan-features {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 30px;
-      }
-
-      .plan-features li {
-        margin-bottom: 10px;
-      }
-
-      .contact-form {
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: #fff;
-        padding: 40px;
-        border-radius: 10px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .form-group {
-        margin-bottom: 25px;
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: var(--secondary-color);
-      }
-
-      .form-group input,
-      .form-group textarea,
-      .form-group select {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        transition: border-color 0.3s ease;
-      }
-
-      .form-group input:focus,
-      .form-group textarea:focus,
-      .form-group select:focus {
-        outline: none;
-        border-color: var(--accent-color);
-      }
-
-      .form-group textarea {
-        height: 150px;
-        resize: vertical;
-      }
-
-      .submit-button {
-        background-color: var(--primary-color);
-        color: #fff;
-        border: none;
-        padding: 15px 40px;
-        border-radius: 50px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        display: block;
-        width: 100%;
-        font-size: 1.1rem;
-      }
-
-      .submit-button:hover {
-        background-color: #ff8c5a;
-        transform: translateY(-3px);
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-      }
-
-      footer {
-        background-color: var(--dark-bg);
-        color: #fff;
-        padding: 60px 0 30px;
-      }
-
-      .footer-content {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin-bottom: 30px;
-      }
-
-      .footer-section {
-        flex: 1;
-        margin-bottom: 30px;
-        min-width: 200px;
-      }
-
-      .footer-section h3 {
-        color: var(--primary-color);
-        margin-bottom: 20px;
-      }
-
-      .footer-links {
-        list-style: none;
-      }
-
-      .footer-links li {
-        margin-bottom: 10px;
-      }
-
-      .footer-links a {
-        color: #fff;
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-
-      .footer-links a:hover {
-        color: var(--primary-color);
-      }
-
-      .social-icons {
-        display: flex;
-        gap: 15px;
-      }
-
-      .social-icons a {
-        color: #fff;
-        font-size: 1.5rem;
-        transition: color 0.3s ease;
-      }
-
-      .social-icons a:hover {
-        color: var(--primary-color);
-      }
-
-      .footer-bottom {
-        text-align: center;
-        padding-top: 30px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .menu-toggle {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        color: #fff;
-        cursor: pointer;
-      }
-
-      @media (max-width: 768px) {
-        .header-content {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        .menu-toggle {
-          display: block;
-          position: absolute;
-          top: 20px;
-          right: 20px;
-        }
-
-        nav {
-          display: none;
-          width: 100%;
-        }
-
-        nav.active {
-          display: block;
-        }
-
-        nav ul {
-          flex-direction: column;
-          width: 100%;
-        }
-
-        nav ul li {
-          margin: 10px 0;
-        }
-
-        .hero h1 {
-          font-size: 2.5rem;
-        }
-
-        .hero p {
-          font-size: 1.2rem;
-        }
-
-        .about-content,
-        .pricing-plans {
-          flex-direction: column;
-        }
-
-        .about-image {
-          order: -1;
-          margin-bottom: 30px;
-        }
-
-        .pricing-plan {
-          margin-bottom: 30px;
-        }
-      }
-    </style>
+    <!-- קישורים ל-FullCalendar -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <!-- סגנונות מותאמים אישית -->
+    <style></style>
   </head>
   <body>
+    <!-- כותרת -->
     <header>
-      <div class="container">
-        <div class="header-content">
-          <img
-            src="https://pfxoibsalklhbdpezysw.supabase.co/storage/v1/object/public/ddd/aaa.png"
-            alt="הקראוון לוגו"
-            class="logo"
-          />
-          <button class="menu-toggle" aria-label="תפריט">
-            <i class="fas fa-bars"></i>
-          </button>
-          <nav>
-            <ul>
-              <li><a href="#about">אודות</a></li>
-              <li><a href="#studios">האולפנים שלנו</a></li>
-              <li><a href="#services">שירותים</a></li>
-              <li><a href="#equipment">ציוד</a></li>
-              <li><a href="#pricing">מחירים</a></li>
-              <li><a href="#contact">צור קשר</a></li>
-            </ul>
-          </nav>
-        </div>
+      <div class="header-content">
+        <img
+          src="https://pfxoibsalklhbdpezysw.supabase.co/storage/v1/object/public/ddd/aaa.png"
+          alt="הקראוון לוגו"
+          class="logo"
+        />
+        <button class="menu-toggle" aria-label="תפריט">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+          <ul>
+            <li><a href="#about">אודות</a></li>
+            <li><a href="#studios">האולפנים שלנו</a></li>
+            <li><a href="#booking-section">הזמנת אולפן</a></li>
+            <li><a href="#services">שירותים</a></li>
+            <li><a href="#equipment">ציוד</a></li>
+            <li><a href="#pricing">מחירים</a></li>
+            <li><a href="#contact">צור קשר</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
 
+    <!-- גיבור -->
     <section class="hero">
       <div class="container">
         <div class="hero-content">
           <h1>הקראוון - רשת אולפני קצה שיתופיים</h1>
           <p>חוויית הקלטה ייחודית בלב הטבע</p>
+          <a href="#contact" class="cta-button">קבע סיור באולפן</a>
         </div>
-        <a href="#contact" class="cta-button">קבע סיור באולפן</a>
       </div>
     </section>
 
+    <!-- אודות -->
     <section id="about" class="section">
       <div class="container">
         <h2 class="section-title">אודותינו</h2>
@@ -618,10 +90,12 @@
       </div>
     </section>
 
+    <!-- האולפנים שלנו -->
     <section id="studios" class="section">
       <div class="container">
         <h2 class="section-title">האולפנים שלנו</h2>
         <div class="studios-grid">
+          <!-- אולפן 1 -->
           <div class="studio-card">
             <div
               class="studio-image"
@@ -639,6 +113,7 @@
               </ul>
             </div>
           </div>
+          <!-- אולפן 2 -->
           <div class="studio-card">
             <div
               class="studio-image"
@@ -656,6 +131,7 @@
               </ul>
             </div>
           </div>
+          <!-- אולפן 3 -->
           <div class="studio-card">
             <div
               class="studio-image"
@@ -676,165 +152,44 @@
         </div>
       </div>
     </section>
-    <section id="booking-section" class="section">
+
+    <!-- הזמנת אולפן -->
+    <section id="booking-section" class="section booking-section">
       <div class="container">
         <h2 class="section-title">הזמנת אולפן</h2>
-        <div id="calendar-app"></div>
+        <div class="booking-container">
+          <div class="booking-header">
+            <select id="studioSelect" class="studio-select">
+              <option value="">בחר אולפן</option>
+            </select>
+            <div class="view-toggle">
+              <button id="weekViewBtn" class="active">שבוע</button>
+              <button id="monthViewBtn">חודש</button>
+            </div>
+            <div class="calendar-nav">
+              <button id="prevButton">&lt;</button>
+              <span id="currentDate"></span>
+              <button id="nextButton">&gt;</button>
+            </div>
+          </div>
+          <div id="calendar"></div>
+        </div>
+        <div id="selectedSlotsInfo" class="selected-slots-info">
+          <h3>שעות נבחרות:</h3>
+          <ul id="selectedSlotsList"></ul>
+          <button id="bookSelectedSlots" class="cta-button">
+            הזמן שעות נבחרות
+          </button>
+        </div>
       </div>
     </section>
-    <style>
-      /* Calendar Styles */
-      .calendar-container {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        margin-bottom: 2rem;
-      }
 
-      .calendar-header {
-        background-color: var(--primary-color);
-        padding: 1rem;
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .calendar-nav {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      .calendar-nav button {
-        background: none;
-        border: none;
-        color: white;
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 50%;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.3s;
-      }
-
-      .calendar-nav button:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-
-      .time-grid {
-        display: grid;
-        grid-template-columns: 80px 1fr;
-        border-right: 1px solid #eee;
-      }
-
-      .time-labels {
-        border-left: 1px solid #eee;
-      }
-
-      .time-label {
-        height: 60px;
-        padding: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #666;
-        font-size: 0.875rem;
-        border-bottom: 1px solid #eee;
-      }
-
-      .time-slots {
-        position: relative;
-        background: linear-gradient(to bottom, #f8f9fa 98%, #eee 2%);
-        background-size: 100% 60px;
-      }
-
-      .slot-wrapper {
-        position: absolute;
-        width: 100%;
-        height: 60px;
-        cursor: pointer;
-      }
-
-      .slot-wrapper:hover {
-        background-color: rgba(255, 107, 53, 0.1);
-      }
-
-      .slot-wrapper.selected {
-        background-color: rgba(255, 107, 53, 0.2);
-      }
-
-      .slot-wrapper.disabled {
-        background-color: #f5f5f5;
-        cursor: not-allowed;
-      }
-
-      .booking-summary {
-        background-color: white;
-        border-radius: 10px;
-        padding: 1.5rem;
-        margin-top: 1rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      .summary-header {
-        font-weight: bold;
-        margin-bottom: 1rem;
-        color: var(--secondary-color);
-      }
-
-      .selected-times {
-        margin-bottom: 1rem;
-        padding: 1rem;
-        background-color: #f8f9fa;
-        border-radius: 8px;
-      }
-
-      .selected-time-slot {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem;
-        background-color: white;
-        border-radius: 4px;
-        margin-bottom: 0.5rem;
-      }
-
-      .studio-selector {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        margin-bottom: 1rem;
-        font-size: 1rem;
-      }
-
-      @media (max-width: 768px) {
-        .calendar-header {
-          flex-direction: column;
-          gap: 1rem;
-        }
-
-        .time-grid {
-          grid-template-columns: 60px 1fr;
-        }
-
-        .time-label {
-          font-size: 0.75rem;
-          padding: 0.25rem;
-        }
-      }
-    </style>
+    <!-- פופאפ הזמנה -->
     <div id="bookingPopup" class="popup">
       <div class="popup-content">
         <h3>אישור הזמנה</h3>
         <p>שעות נבחרות:</p>
         <div id="selectedHours"></div>
-
         <p>מחיר כולל: <span id="totalPrice"></span> ₪</p>
         <input
           type="email"
@@ -861,6 +216,8 @@
         <button id="cancelBooking">ביטול</button>
       </div>
     </div>
+
+    <!-- שירותים -->
     <section id="services" class="section">
       <div class="container">
         <h2 class="section-title">השירותים שלנו</h2>
@@ -908,18 +265,8 @@
         </div>
       </div>
     </section>
-    <script>
-      const selectedSlotsList = document.getElementById("selectedSlotsList");
-      this.selectedSlots.forEach((slot) => {
-        const li = document.createElement("li");
-        li.textContent = `${new Date(slot.date).toLocaleDateString(
-          "he-IL"
-        )} ${slot.start_time.slice(0, 5)} - ${slot.end_time.slice(0, 5)}`;
-        selectedSlotsList.appendChild(li);
-      });
-      this.bookSelectedSlotsBtn.style.display =
-        this.selectedSlots.length > 0 ? "block" : "none";
-    </script>
+
+    <!-- ציוד -->
     <section id="equipment" class="section">
       <div class="container">
         <h2 class="section-title">הציוד שלנו</h2>
@@ -948,6 +295,7 @@
       </div>
     </section>
 
+    <!-- מחירים -->
     <section id="pricing" class="section">
       <div class="container">
         <h2 class="section-title">מחירים</h2>
@@ -992,6 +340,7 @@
       </div>
     </section>
 
+    <!-- טופס יצירת קשר -->
     <section id="contact" class="section">
       <div class="container">
         <h2 class="section-title">צור קשר</h2>
@@ -1009,15 +358,6 @@
             <input type="tel" id="phone" name="phone" required />
           </div>
           <div class="form-group">
-            <label for="studio">בחר אולפן</label>
-            <select id="studio" name="studio" required>
-              <option value="">בחר אולפן</option>
-              <option value="forest">הקראוון בחורשה</option>
-              <option value="beach">הקראוון על החוף</option>
-              <option value="mountain">הקראוון בהר</option>
-            </select>
-          </div>
-          <div class="form-group">
             <label for="message">הודעה</label>
             <textarea id="message" name="message" required></textarea>
           </div>
@@ -1026,6 +366,7 @@
       </div>
     </section>
 
+    <!-- תחתית -->
     <footer>
       <div class="container">
         <div class="footer-content">
@@ -1070,6 +411,10 @@
       </div>
     </footer>
 
+    <!-- סקריפטים -->
+    <!-- קישורים ל-FullCalendar ו-Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
       // תפריט נייד
       const menuToggle = document.querySelector(".menu-toggle");
@@ -1132,263 +477,31 @@
         const header = document.querySelector("header");
         header.classList.toggle("scrolled", window.scrollY > 0);
       });
-    </script>
 
-    <style>
-      :root {
-        --primary-color: #4a90e2;
-        --secondary-color: #f39c12;
-        --text-color: #333;
-        --background-color: #f4f4f4;
-      }
+      // אתחול מערכת ההזמנות
+      document.addEventListener("DOMContentLoaded", function () {
+        const bookingSystem = new BookingSystem(
+          "https://pfxoibsalklhbdpezysw.supabase.co",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmeG9pYnNhbGtsaGJkcGV6eXN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0NDg0OTUsImV4cCI6MjA0NTAyNDQ5NX0.D5dKf2A6tTDVizHNyM-Lq68riIwzqy7NRpYFQIKlT20" // החלף במפתח ה-Anon שלך מ-Supabase
+        );
+      });
 
-      body {
-        font-family: "Heebo", sans-serif;
-        line-height: 1.6;
-        color: var(--text-color);
-        background-color: var(--background-color);
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-
-      .booking-container {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        margin-bottom: 20px;
-      }
-
-      .booking-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        background-color: var(--primary-color);
-        color: #fff;
-      }
-
-      .studio-select {
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        font-size: 1rem;
-        width: 100%;
-        max-width: 200px;
-      }
-
-      .view-toggle button,
-      .calendar-nav button {
-        background: none;
-        border: none;
-        color: #fff;
-        padding: 5px 10px;
-        cursor: pointer;
-        font-size: 1rem;
-        transition: opacity 0.3s;
-      }
-
-      .view-toggle button.active {
-        font-weight: bold;
-        text-decoration: underline;
-      }
-
-      .calendar {
-        display: grid;
-        gap: 1px;
-        background-color: #e0e0e0;
-      }
-
-      .calendar.week-view {
-        grid-template-columns: repeat(7, 1fr);
-      }
-
-      .calendar.month-view {
-        grid-template-columns: repeat(7, 1fr);
-      }
-      #selectedHours {
-        margin-top: 10px;
-        padding: 10px;
-        background-color: #f0f0f0;
-        border-radius: 5px;
-        font-size: 0.9em;
-      }
-      .calendar-day {
-        background-color: #fff;
-        min-height: 100px;
-        padding: 10px;
-        font-size: 0.9rem;
-      }
-
-      .calendar-day .date {
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-
-      .calendar-day .slots {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-      }
-
-      .time-slot {
-        background-color: var(--secondary-color);
-        color: #fff;
-        padding: 5px;
-        border-radius: 3px;
-        font-size: 0.8rem;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        display: flex;
-        align-items: center;
-      }
-
-      .time-slot:hover {
-        background-color: var(--primary-color);
-      }
-
-      .time-slot.selected {
-        background-color: var(--primary-color);
-      }
-
-      .time-slot.booked {
-        background-color: #ccc;
-        cursor: not-allowed;
-      }
-
-      .time-slot-checkbox {
-        margin-right: 5px;
-      }
-
-      .selected-slots-info {
-        background-color: #fff;
-        border-radius: 10px;
-        padding: 20px;
-        margin-top: 20px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .selected-slots-info h3 {
-        margin-bottom: 10px;
-      }
-
-      .selected-slots-info ul {
-        list-style-type: none;
-        padding: 0;
-      }
-
-      .selected-slots-info li {
-        margin-bottom: 5px;
-        padding: 5px;
-        background-color: #f0f0f0;
-        border-radius: 3px;
-      }
-
-      .cta-button {
-        background-color: var(--primary-color);
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1rem;
-        margin-top: 10px;
-        transition: background-color 0.3s;
-      }
-
-      .cta-button:hover {
-        background-color: #3a7abd;
-      }
-
-      .popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .popup-content {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        max-width: 400px;
-        width: 90%;
-      }
-
-      .popup-content input,
-      .popup-content button {
-        display: block;
-        width: 100%;
-        margin: 10px 0;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-      }
-
-      .popup-content button {
-        background-color: var(--primary-color);
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      .popup-content button:hover {
-        background-color: #3a7abd;
-      }
-
-      @media (max-width: 768px) {
-        .booking-header {
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        .studio-select {
-          max-width: 100%;
-        }
-
-        .calendar.week-view,
-        .calendar.month-view {
-          grid-template-columns: repeat(1, 1fr);
-        }
-
-        .calendar-day {
-          min-height: auto;
-        }
-
-        .time-slot {
-          font-size: 0.7rem;
-        }
-      }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <script>
       class BookingSystem {
         constructor(supabaseUrl, supabaseKey) {
           this.supabase = supabase.createClient(supabaseUrl, supabaseKey);
           this.currentDate = new Date();
-          this.currentView = "week";
+          this.currentView = "timeGridWeek";
           this.selectedStudio = null;
           this.selectedSlots = [];
           this.initElements();
+          this.initCalendar();
           this.addEventListeners();
           this.loadStudios();
-          this.updateCalendar();
         }
 
         initElements() {
           this.studioSelect = document.getElementById("studioSelect");
-          this.calendar = document.getElementById("calendar");
+          this.calendarEl = document.getElementById("calendar");
           this.currentDateSpan = document.getElementById("currentDate");
           this.prevButton = document.getElementById("prevButton");
           this.nextButton = document.getElementById("nextButton");
@@ -1397,8 +510,9 @@
           this.selectedSlotsList = document.getElementById("selectedSlotsList");
           this.bookSelectedSlotsBtn =
             document.getElementById("bookSelectedSlots");
+          // אלמנטים נוספים
           this.bookingPopup = document.getElementById("bookingPopup");
-          this.selectedHoursSpan = document.getElementById("selectedHours");
+          this.selectedHoursDiv = document.getElementById("selectedHours");
           this.totalPriceSpan = document.getElementById("totalPrice");
           this.userEmailInput = document.getElementById("userEmail");
           this.userPhoneInput = document.getElementById("userPhone");
@@ -1414,19 +528,52 @@
           this.cancelBookingButton = document.getElementById("cancelBooking");
         }
 
+        initCalendar() {
+          this.calendar = new FullCalendar.Calendar(this.calendarEl, {
+            initialView: this.currentView,
+            locale: "he",
+            direction: "rtl",
+            headerToolbar: false,
+            selectable: true,
+            editable: true,
+            slotMinTime: "09:00:00",
+            slotMaxTime: "23:00:00",
+            allDaySlot: false,
+            select: this.handleTimeSelect.bind(this),
+            eventClick: this.handleEventClick.bind(this),
+            events: this.fetchEvents.bind(this),
+          });
+          this.calendar.render();
+          this.updateCurrentDateDisplay();
+        }
+
         addEventListeners() {
-          this.studioSelect.addEventListener(
-            "change",
-            this.handleStudioChange.bind(this)
-          );
-          this.prevButton.addEventListener("click", () => this.changeDate(-1));
-          this.nextButton.addEventListener("click", () => this.changeDate(1));
-          this.weekViewBtn.addEventListener("click", () =>
-            this.setView("week")
-          );
-          this.monthViewBtn.addEventListener("click", () =>
-            this.setView("month")
-          );
+          this.studioSelect.addEventListener("change", () => {
+            this.selectedStudio = this.studioSelect.value;
+            this.calendar.refetchEvents();
+          });
+          this.prevButton.addEventListener("click", () => {
+            this.calendar.prev();
+            this.updateCurrentDateDisplay();
+          });
+          this.nextButton.addEventListener("click", () => {
+            this.calendar.next();
+            this.updateCurrentDateDisplay();
+          });
+          this.weekViewBtn.addEventListener("click", () => {
+            this.currentView = "timeGridWeek";
+            this.calendar.changeView(this.currentView);
+            this.updateViewButtons();
+            this.updateCurrentDateDisplay();
+          });
+          this.monthViewBtn.addEventListener("click", () => {
+            this.currentView = "dayGridMonth";
+            this.calendar.changeView(this.currentView);
+            this.updateViewButtons();
+            this.updateCurrentDateDisplay();
+          });
+
+          // כפתורים בפופאפ
           this.bookSelectedSlotsBtn.addEventListener(
             "click",
             this.openPopup.bind(this)
@@ -1449,6 +596,35 @@
           );
         }
 
+        updateViewButtons() {
+          this.weekViewBtn.classList.toggle(
+            "active",
+            this.currentView === "timeGridWeek"
+          );
+          this.monthViewBtn.classList.toggle(
+            "active",
+            this.currentView === "dayGridMonth"
+          );
+        }
+
+        updateCurrentDateDisplay() {
+          const view = this.calendar.view;
+          const start = view.activeStart;
+          const end = view.activeEnd;
+          const options = { year: "numeric", month: "long", day: "numeric" };
+          if (this.currentView === "timeGridWeek") {
+            this.currentDateSpan.textContent = `${start.toLocaleDateString(
+              "he-IL",
+              options
+            )} - ${end.toLocaleDateString("he-IL", options)}`;
+          } else {
+            this.currentDateSpan.textContent = `${start.toLocaleDateString(
+              "he-IL",
+              { month: "long", year: "numeric" }
+            )}`;
+          }
+        }
+
         async loadStudios() {
           try {
             const { data, error } = await this.supabase
@@ -1462,155 +638,90 @@
                   `<option value="${studio.id}">${studio.name}</option>`
               )
               .join("");
-            this.studioSelect.innerHTML =
-              '<option value="">בחר אולפן</option>' + options;
+            this.studioSelect.innerHTML += options;
+
+            // אם יש רק אולפן אחד, לבחור אותו אוטומטית
+            if (data.length === 1) {
+              this.selectedStudio = data[0].id;
+              this.studioSelect.value = this.selectedStudio;
+              this.calendar.refetchEvents();
+            }
           } catch (error) {
             console.error("Error loading studios:", error);
-            this.showError("אירעה שגיאה בטעינת האולפנים. אנא נסה שנית.");
+            alert("שגיאה בטעינת האולפנים");
           }
         }
 
-        async loadAvailability() {
-          if (!this.selectedStudio) return;
-
-          const startDate =
-            this.currentView === "week"
-              ? this.getStartOfWeek(this.currentDate)
-              : this.getStartOfMonth(this.currentDate);
-          const endDate =
-            this.currentView === "week"
-              ? this.getEndOfWeek(this.currentDate)
-              : this.getEndOfMonth(this.currentDate);
-
+        async fetchEvents(info, successCallback, failureCallback) {
+          if (!this.selectedStudio) {
+            successCallback([]);
+            return;
+          }
           try {
-            const { data, error } = await this.supabase.rpc(
-              "check_availability_range",
-              {
-                p_studio_id: this.selectedStudio,
-                p_start_date: startDate.toISOString().split("T")[0],
-                p_end_date: endDate.toISOString().split("T")[0],
-              }
-            );
-
+            const { data, error } = await this.supabase
+              .from("bookings")
+              .select("*")
+              .eq("studio_id", this.selectedStudio)
+              .gte("start_time", info.startStr)
+              .lte("end_time", info.endStr);
             if (error) throw error;
-            this.updateCalendar(data);
+
+            const events = data.map((booking) => ({
+              id: booking.id,
+              title: booking.title || "הזמנה",
+              start: booking.start_time,
+              end: booking.end_time,
+              backgroundColor: this.getEventColor(booking.status),
+              borderColor: this.getEventColor(booking.status),
+              editable: booking.status !== "confirmed",
+            }));
+            successCallback(events);
           } catch (error) {
-            console.error("Error loading availability:", error);
-            this.showError("אירעה שגיאה בטעינת הזמינות. אנא נסה שנית.");
+            console.error("Error fetching events:", error);
+            failureCallback(error);
           }
         }
 
-        updateCalendar(availabilityData = []) {
-          this.calendar.innerHTML = "";
-          this.currentDateSpan.textContent = this.formatDateRange();
-          this.calendar.className = `calendar ${this.currentView}-view`;
-
-          const startDate =
-            this.currentView === "week"
-              ? this.getStartOfWeek(this.currentDate)
-              : this.getStartOfMonth(this.currentDate);
-          const daysToShow =
-            this.currentView === "week"
-              ? 7
-              : this.getDaysInMonth(this.currentDate);
-
-          for (let i = 0; i < daysToShow; i++) {
-            const date = new Date(startDate);
-            date.setDate(startDate.getDate() + i);
-            if (
-              this.currentView === "week" &&
-              (date.getDay() === 5 || date.getDay() === 6)
-            )
-              continue; // Skip Friday and Saturday for week view
-            const dayElement = this.createDayElement(date, availabilityData);
-            this.calendar.appendChild(dayElement);
+        getEventColor(status) {
+          switch (status) {
+            case "confirmed":
+              return "#28a745";
+            case "pending":
+              return "#ffc107";
+            case "cancelled":
+              return "#dc3545";
+            default:
+              return "#6c757d";
           }
         }
 
-        createDayElement(date, availabilityData) {
-          const dayElement = document.createElement("div");
-          dayElement.className = "calendar-day";
-          dayElement.innerHTML = `
-      <div class="date">${date.toLocaleDateString("he-IL", {
-        weekday: "short",
-        day: "numeric",
-        month: "short",
-      })}</div>
-      <div class="slots"></div>
-    `;
-
-          const slotsContainer = dayElement.querySelector(".slots");
-          const dayAvailability = availabilityData.filter(
-            (slot) => new Date(slot.date).toDateString() === date.toDateString()
-          );
-
-          if (
-            date.getDay() !== 5 &&
-            date.getDay() !== 6 &&
-            date >= new Date().setHours(0, 0, 0, 0)
-          ) {
-            for (let hour = 9; hour < 23; hour++) {
-              const slotElement = document.createElement("div");
-              slotElement.className = "time-slot";
-
-              const checkbox = document.createElement("input");
-              checkbox.type = "checkbox";
-              checkbox.className = "time-slot-checkbox";
-              slotElement.appendChild(checkbox);
-
-              const timeLabel = document.createElement("span");
-              timeLabel.textContent = `${hour
-                .toString()
-                .padStart(2, "0")}:00 - ${(hour + 1)
-                .toString()
-                .padStart(2, "0")}:00`;
-              slotElement.appendChild(timeLabel);
-
-              const slot = dayAvailability.find((s) =>
-                s.start_time.startsWith(`${hour.toString().padStart(2, "0")}:`)
-              );
-              if (slot) {
-                slotElement.dataset.id = slot.id;
-                if (slot.is_booked) {
-                  slotElement.classList.add("booked");
-                  checkbox.disabled = true;
-                } else {
-                  checkbox.addEventListener("change", () =>
-                    this.toggleSlotSelection(checkbox, slot)
-                  );
-                }
-              }
-
-              slotsContainer.appendChild(slotElement);
-            }
+        handleTimeSelect(info) {
+          // ניתן להוסיף לוגיקה לבדיקת זמינות
+          const confirmBooking = confirm("האם ברצונך להזמין את הזמן הנבחר?");
+          if (confirmBooking) {
+            // שמירת המידע עבור הפופאפ
+            this.selectedBookingInfo = {
+              start: info.start,
+              end: info.end,
+            };
+            this.selectedSlots.push(this.selectedBookingInfo);
+            this.updateSelectedSlotsList();
           }
-
-          return dayElement;
+          this.calendar.unselect();
         }
 
-        toggleSlotSelection(checkbox, slot) {
-          if (checkbox.checked) {
-            this.selectedSlots.push(slot);
-          } else {
-            this.selectedSlots = this.selectedSlots.filter(
-              (s) => s.id !== slot.id
-            );
-          }
-          this.updateSelectedSlotsList();
+        handleEventClick(info) {
+          // ניתן להוסיף לוגיקה לטיפול בלחיצה על אירוע
+          alert(`אירוע: ${info.event.title}`);
         }
 
         updateSelectedSlotsList() {
           this.selectedSlotsList.innerHTML = "";
-          this.selectedSlots.sort(
-            (a, b) =>
-              new Date(a.date + "T" + a.start_time) -
-              new Date(b.date + "T" + b.start_time)
-          );
           this.selectedSlots.forEach((slot) => {
             const li = document.createElement("li");
-            li.textContent = `${new Date(slot.date).toLocaleDateString(
+            li.textContent = `${slot.start.toLocaleString(
               "he-IL"
-            )} ${slot.start_time.slice(0, 5)} - ${slot.end_time.slice(0, 5)}`;
+            )} - ${slot.end.toLocaleString("he-IL")}`;
             this.selectedSlotsList.appendChild(li);
           });
           this.bookSelectedSlotsBtn.style.display =
@@ -1618,9 +729,14 @@
         }
 
         openPopup() {
-          const selectedHoursElement = document.getElementById("selectedHours");
-          selectedHoursElement.textContent = this.formatSelectedHours();
-          this.selectedHoursSpan.textContent = this.formatSelectedHours();
+          this.selectedHoursDiv.textContent = this.selectedSlots
+            .map(
+              (slot) =>
+                `${slot.start.toLocaleString(
+                  "he-IL"
+                )} - ${slot.end.toLocaleString("he-IL")}`
+            )
+            .join(", ");
           this.totalPriceSpan.textContent = this.calculateTotalPrice();
           this.bookingPopup.style.display = "flex";
         }
@@ -1629,164 +745,54 @@
           this.bookingPopup.style.display = "none";
           this.selectedSlots = [];
           this.updateSelectedSlotsList();
-          this.updateCalendar();
-        }
-
-        formatSelectedHours() {
-          return this.selectedSlots
-            .map(
-              (slot) =>
-                `${new Date(slot.date).toLocaleDateString(
-                  "he-IL"
-                )} ${slot.start_time.slice(0, 5)} - ${slot.end_time.slice(
-                  0,
-                  5
-                )}`
-            )
-            .join(", ");
+          this.calendar.refetchEvents();
         }
 
         calculateTotalPrice() {
-          const pricePerHour = 100; // Assume a fixed price per hour
-          return this.selectedSlots.length * pricePerHour;
+          const pricePerHour = 200; // לדוגמה
+          let totalHours = 0;
+          this.selectedSlots.forEach((slot) => {
+            totalHours += (slot.end - slot.start) / (1000 * 60 * 60);
+          });
+          return totalHours * pricePerHour;
         }
 
-        async sendVerificationCode() {
-          const email = this.userEmailInput.value;
-          const phone = this.userPhoneInput.value;
-
-          if (!email || !phone) {
-            this.showError("נא להזין אימייל ומספר טלפון");
-            return;
-          }
-
-          // Here you would typically send the verification code via email and SMS
-          // For this example, we'll just simulate it
-          this.showSuccess("קוד אימות נשלח לאימייל ולטלפון שלך");
+        sendVerificationCode() {
+          // כאן ניתן להוסיף קוד לשליחת קוד אימות
+          alert("קוד אימות נשלח לאימייל ולמספר הטלפון שהזנת");
           this.verificationSection.style.display = "block";
         }
 
-        async verifyCode() {
-          const code = this.verificationCodeInput.value;
-
-          if (!code) {
-            this.showError("נא להזין את קוד האימות");
-            return;
-          }
-
-          // Here you would typically verify the code
-          // For this example, we'll just simulate it
-          this.showSuccess("הקוד אומת בהצלחה");
+        verifyCode() {
+          // כאן ניתן להוסיף קוד לאימות הקוד
+          alert("הקוד אומת בהצלחה");
           this.confirmBookingButton.style.display = "block";
         }
 
         async confirmBooking() {
           try {
-            // Here you would typically save the booking to your database
-            // For this example, we'll just simulate it
-            this.showSuccess("ההזמנה אושרה בהצלחה!");
+            const bookings = this.selectedSlots.map((slot) => ({
+              studio_id: this.selectedStudio,
+              start_time: slot.start.toISOString(),
+              end_time: slot.end.toISOString(),
+              status: "pending",
+              user_email: this.userEmailInput.value,
+              user_phone: this.userPhoneInput.value,
+            }));
+            const { data, error } = await this.supabase
+              .from("bookings")
+              .insert(bookings);
+            if (error) throw error;
+
+            alert("ההזמנה אושרה בהצלחה!");
             this.closePopup();
+            this.calendar.refetchEvents();
           } catch (error) {
             console.error("Error confirming booking:", error);
-            this.showError("אירעה שגיאה באישור ההזמנה. אנא נסה שנית.");
+            alert("שגיאה באישור ההזמנה");
           }
-        }
-
-        handleStudioChange(e) {
-          this.selectedStudio = e.target.value;
-          if (this.selectedStudio) {
-            this.loadAvailability();
-          } else {
-            this.updateCalendar();
-          }
-        }
-
-        changeDate(direction) {
-          if (this.currentView === "week") {
-            this.currentDate.setDate(
-              this.currentDate.getDate() + direction * 7
-            );
-          } else {
-            this.currentDate.setMonth(this.currentDate.getMonth() + direction);
-          }
-          this.loadAvailability();
-        }
-
-        setView(view) {
-          this.currentView = view;
-          this.weekViewBtn.classList.toggle("active", view === "week");
-          this.monthViewBtn.classList.toggle("active", view === "month");
-          this.loadAvailability();
-        }
-
-        getStartOfWeek(date) {
-          const d = new Date(date);
-          const day = d.getDay();
-          const diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is Sunday
-          return new Date(d.setDate(diff));
-        }
-
-        getEndOfWeek(date) {
-          const d = new Date(date);
-          const day = d.getDay();
-          const diff = d.getDate() - day + 7; // add 7 to get to the end of the week
-          return new Date(d.setDate(diff));
-        }
-
-        getStartOfMonth(date) {
-          return new Date(date.getFullYear(), date.getMonth(), 1);
-        }
-
-        getEndOfMonth(date) {
-          return new Date(date.getFullYear(), date.getMonth() + 1, 0);
-        }
-
-        getDaysInMonth(date) {
-          return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-        }
-
-        formatDateRange() {
-          if (this.currentView === "week") {
-            const startDate = this.getStartOfWeek(this.currentDate);
-            const endDate = this.getEndOfWeek(this.currentDate);
-            return `${startDate.toLocaleDateString(
-              "he-IL"
-            )} - ${endDate.toLocaleDateString("he-IL")}`;
-          } else {
-            return this.currentDate.toLocaleDateString("he-IL", {
-              year: "numeric",
-              month: "long",
-            });
-          }
-        }
-
-        showError(message) {
-          alert(message); // You can replace this with a more sophisticated error display
-        }
-
-        showSuccess(message) {
-          alert(message); // You can replace this with a more sophisticated success message display
         }
       }
-
-      const bookingSystem = new BookingSystem(
-        "https://pfxoibsalklhbdpezysw.supabase.co",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmeG9pYnNhbGtsaGJkcGV6eXN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0NDg0OTUsImV4cCI6MjA0NTAyNDQ5NX0.D5dKf2A6tTDVizHNyM-Lq68riIwzqy7NRpYFQIKlT20"
-      );
-
-      // הערות נוספות לשימוש ושיפור המערכת:
-
-      // 1. ניהול מצב (State Management):
-      // במערכות גדולות יותר, כדאי לשקול שימוש בספריית ניהול מצב כמו Redux או MobX.
-
-      // 2. תמיכה בשפות נוספות:
-      // ניתן להוסיף תמיכה בשפות נוספות על ידי שימוש בקובץ תרגומים.
-
-      // 3. שיפור UX:
-      // הוספת אנימציות ומעברים חלקים יותר יכולה לשפר את חוויית המשתמש.
-
-      // 4. אבטחה:
-      // יש להקפיד על אבטחת ה
     </script>
   </body>
 </html>
