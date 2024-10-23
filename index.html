@@ -555,8 +555,8 @@
             headerToolbar: false,
             selectable: true,
             editable: false,
-            longPressDelay: 2000, // זמן תגובה ארוך ללחיצה ארוכה במובייל
-            selectLongPressDelay: 2000, // זמן תגובה ללחיצה ארוכה לבחירת טווח
+            longPressDelay: 200, // זמן תגובה ארוך ללחיצה ארוכה במובייל
+            selectLongPressDelay: 10, // זמן תגובה ללחיצה ארוכה לבחירת טווח
             slotMinTime: "09:00:00",
             slotMaxTime: "23:00:00",
             allDaySlot: false,
@@ -1097,27 +1097,6 @@
         position: relative;
         overflow: hidden;
         margin-top: 80px; /* התאמה לגובה הכותרת */
-      }
-
-      @media (max-width: 768px) {
-        .hero {
-          background-attachment: scroll; /* כדי למנוע בעיות בגלילה */
-          background-size: cover; /* מכסה את המסך בצורה מלאה */
-          background-position: top; /* ממקם את התמונה בחלק העליון */
-          height: 60vh; /* מקטין את גובה ה-hero למכשירים ניידים */
-        }
-
-        .hero h1 {
-          font-size: 2.5rem; /* התאמה של גודל הטקסט בניידים */
-        }
-
-        .hero p {
-          font-size: 1.2rem; /* התאמה של גודל הפסקה בניידים */
-        }
-
-        .cta-button {
-          padding: 10px 30px; /* התאמה של הכפתור בניידים */
-        }
       }
 
       .hero::before {
@@ -1830,6 +1809,21 @@
         font-size: 1.8rem;
         color: #fff;
         cursor: pointer;
+      }
+
+      /* גיבור */
+      .hero {
+        background-image: url("https://pfxoibsalklhbdpezysw.supabase.co/storage/v1/object/public/ddd/DSC01435-scaled.webp"); /* החלף בכתובת התמונה שלך */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-top: 80px;
       }
 
       .hero::before {
