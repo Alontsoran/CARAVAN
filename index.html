@@ -966,6 +966,13 @@
           }
         }
       }
+      document.addEventListener(
+        "touchstart",
+        function (e) {
+          // Your code for handling touch events
+        },
+        { passive: true }
+      );
     </script>
     <style>
       /* סגנונות כלליים */
@@ -1250,6 +1257,11 @@
         margin-bottom: 10px;
         display: flex;
         align-items: center;
+      }
+      #calendar {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
       }
 
       .studio-features li i {
