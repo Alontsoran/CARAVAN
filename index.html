@@ -2876,6 +2876,125 @@
       .fc-timegrid-slot.fc-timegrid-slot-lane {
         background-color: #f0f0f0;
       }
+      /* התאמות למובייל */
+      @media (max-width: 768px) {
+        .booking-header {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .studio-select,
+        .view-toggle button,
+        .calendar-nav button {
+          width: 100%;
+          font-size: 1.2rem; /* הגדלת גודל הפונט */
+          padding: 15px; /* הגדלת הריווח */
+        }
+
+        .calendar-nav {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .calendar-nav span {
+          font-size: 1.2rem; /* הגדלת גודל הטקסט */
+          margin-bottom: 10px;
+        }
+
+        #calendar {
+          font-size: 1rem; /* הגדלת גודל הטקסט בלוח השנה */
+        }
+
+        /* הגדלת כפתורים בלוח השנה */
+        .fc-button {
+          font-size: 1rem;
+          padding: 10px 20px;
+        }
+
+        /* הגדלת טקסט בכותרות */
+        .fc-toolbar-title {
+          font-size: 1.2rem;
+        }
+
+        /* התאמת גודל תאים בלוח השנה */
+        .fc-daygrid-day-number,
+        .fc-timegrid-slot-label-cushion {
+          font-size: 1rem;
+        }
+
+        /* התאמת גודל האירועים בלוח השנה */
+        .fc-event {
+          font-size: 1rem;
+        }
+        #calendar {
+          overflow-x: auto;
+        }
+        @media (max-width: 768px) {
+          .booking-header {
+            flex-direction: column;
+            align-items: stretch;
+          }
+
+          .view-toggle {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+          }
+
+          .view-toggle button {
+            flex: 1;
+          }
+
+          .calendar-nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+          }
+
+          .calendar-nav button {
+            flex: 1;
+            margin: 0 5px;
+          }
+
+          .calendar-nav span {
+            flex: 2;
+            text-align: center;
+          }
+          .popup-content input,
+          .popup-content button {
+            font-size: 1.2rem; /* הגדלת גודל הפונט */
+            padding: 15px; /* הגדלת הריווח */
+          }
+
+          .popup-content h3 {
+            font-size: 1.8rem; /* הגדלת כותרת */
+          }
+
+          .popup-content p {
+            font-size: 1.2rem; /* הגדלת טקסט */
+          }
+          .booking-container {
+            padding: 20px;
+          }
+
+          #calendar {
+            min-height: 600px; /* הגדלת הגובה המינימלי */
+          }
+        }
+        /* הגדלת פונטים וכפתורים כלליים */
+        body {
+          font-size: 1.1rem;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+          font-size: 1.1rem;
+        }
+      }
     </style>
     <script>
             /* אפקט הצללה לתפריט בעת גלילה */
