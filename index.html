@@ -1788,6 +1788,281 @@
       #verificationSection button:hover {
         background-color: #39b4a8;
       }
+      .booking-container {
+        background-color: #fff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .booking-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .studio-select {
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        font-size: 1.1rem;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+      }
+
+      .studio-select:focus {
+        border-color: var(--accent-color);
+      }
+
+      .view-toggle {
+        display: flex;
+        gap: 10px;
+      }
+
+      .view-toggle button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #ddd;
+        color: #333;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .view-toggle button.active {
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+
+      .view-toggle button:hover {
+        background-color: var(--accent-color);
+        color: #fff;
+      }
+
+      .calendar-nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .calendar-nav button {
+        padding: 10px 15px;
+        border: none;
+        background-color: var(--primary-color);
+        color: #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .calendar-nav button:hover {
+        background-color: #ff8c5a;
+      }
+
+      #currentDate {
+        font-size: 1.1rem;
+        color: #333;
+        font-weight: bold;
+      }
+
+      #calendar {
+        background-color: #f9f9f9;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
+      }
+
+      .fc-timegrid {
+        font-size: 0.9rem;
+      }
+
+      .fc .fc-col-header-cell-cushion {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .fc .fc-daygrid-day {
+        border-radius: 10px;
+        transition: background-color 0.3s ease;
+      }
+
+      .fc .fc-daygrid-day:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+      }
+
+      .fc .fc-button {
+        background-color: var(--primary-color);
+        color: #fff;
+        border-radius: 50px;
+        padding: 10px 20px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .fc .fc-button:hover {
+        background-color: #ff8c5a;
+      }
+
+      .fc .fc-timegrid-slot-label {
+        color: #333;
+      }
+
+      .fc .fc-timegrid-slot {
+        border-color: #ddd;
+      }
+      /* סגנון נוסף עבור הניידים */
+      @media (max-width: 768px) {
+        .popup-content {
+          padding: 20px;
+          width: 95%;
+        }
+
+        .popup-content h3 {
+          font-size: 1.6rem;
+        }
+
+        .popup-content p {
+          font-size: 1rem;
+        }
+
+        .popup-content input,
+        .popup-content button {
+          font-size: 1rem;
+        }
+      }
+      /* התאמות למובייל */
+      @media (max-width: 768px) {
+        .booking-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .studio-select,
+        .view-toggle button,
+        .calendar-nav button {
+          width: 100%;
+          text-align: center;
+        }
+
+        .calendar-nav {
+          justify-content: space-between;
+        }
+      }
+      .booking-container {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .booking-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .studio-select {
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        width: 100%;
+        font-size: 1.2rem;
+      }
+
+      .view-toggle button {
+        padding: 10px 15px;
+        background-color: #ddd;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        width: 48%;
+        font-size: 1rem;
+      }
+
+      .view-toggle button.active {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .calendar-nav {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .calendar-nav button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 48%;
+      }
+
+      .calendar-nav span {
+        font-size: 1.1rem;
+        width: 100%;
+        text-align: center;
+      }
+
+      #calendar {
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      /* Mobile-specific adjustments */
+      @media (max-width: 768px) {
+        .booking-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .studio-select {
+          width: 100%;
+          font-size: 1rem;
+        }
+
+        .view-toggle button,
+        .calendar-nav button {
+          width: 100%;
+          text-align: center;
+        }
+
+        .calendar-nav {
+          justify-content: space-between;
+          width: 100%;
+        }
+
+        .calendar-nav span {
+          font-size: 1rem;
+          width: 100%;
+          text-align: center;
+        }
+
+        #calendar {
+          font-size: 0.9rem; /* Reduce font size for calendar to fit */
+          width: 100%;
+          overflow-x: auto;
+        }
+        .fc .fc-col-header-cell-cushion {
+          font-size: 10px;
+          font-weight: bold;
+          color: #333;
+        }
+      }
     </style>
   </body>
 </html>
