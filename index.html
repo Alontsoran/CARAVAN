@@ -5,10 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>הקראוון - רשת אולפני קצה שיתופיים | חוויית הקלטה ייחודית</title>
     <!-- קישורים לגופנים ו-CSS -->
+    <!-- FullCalendar CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+
+    <!-- FullCalendar interactionPlugin (ממשק גרירה במובייל) -->
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@5.11.0/main.global.min.js"></script>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&family=Rubik:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@5.11.0/main.global.min.js"></script>
+
     <!-- קישורים ל-Font Awesome -->
     <link
       rel="stylesheet"
@@ -540,7 +554,9 @@
             direction: "rtl",
             headerToolbar: false,
             selectable: true,
-            editable: false, // האירועים לא יהיו ניתנים לעריכה
+            editable: false,
+            longPressDelay: 1000, // זמן תגובה ארוך ללחיצה ארוכה במובייל
+            selectLongPressDelay: 1000, // זמן תגובה ללחיצה ארוכה לבחירת טווח
             slotMinTime: "09:00:00",
             slotMaxTime: "23:00:00",
             allDaySlot: false,
@@ -974,6 +990,7 @@
         { passive: true }
       );
     </script>
+
     <style>
       /* סגנונות כלליים */
       :root {
