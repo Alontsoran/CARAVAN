@@ -577,6 +577,10 @@
             this.calendar.changeView(this.currentView);
             this.updateViewButtons();
             this.updateCurrentDateDisplay();
+            this.cancelBookingButton.addEventListener(
+              "click",
+              this.closePopup.bind(this)
+            );
           });
 
           // כפתורים בפופאפ
@@ -816,15 +820,124 @@
         }
 
         sendVerificationCode() {
-          // כאן ניתן להוסיף קוד לשליחת קוד אימות באמצעות שירות חיצוני כמו Firebase, Twilio וכו'
-          alert("קוד אימות נשלח לאימייל ולמספר הטלפון שהזנת");
-          this.verificationSection.style.display = "block";
+          const email = this.userEmailInput.value;
+          const phone = this.userPhoneInput.value;
+
+          // בדיקות תקינות בסיסיות
+          if (!email || !phone) {
+            alert("נא למלא את כל השדות");
+            return;
+          }
+
+          // הצגת אנימציית טעינה
+          this.sendVerificationButton.disabled = true;
+          this.sendVerificationButton.textContent = "שולח...";
+
+          // שליחת בקשה לשרת Python Anywhere
+          fetch(
+            "https://alontsoran00.pythonanywhere.com/api/send-verification",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: email,
+                phone: phone,
+                booking_details: {
+                  studio_id: this.selectedStudio,
+                  slots: this.selectedSlots.map((slot) => ({
+                    start: slot.start.toISOString(),
+                    end: slot.end.toISOString(),
+                  })),
+                  total_price: this.calculateTotalPrice(),
+                },
+              }),
+            }
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              if (data.success) {
+                this.verificationSection.style.display = "block";
+                alert("קוד אימות נשלח לאימייל שלך");
+
+                // התחלת טיימר של 10 דקות
+                this.startVerificationTimer();
+              } else {
+                alert(data.message || "שגיאה בשליחת קוד האימות");
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("שגיאה בשליחת הבקשה לשרת");
+            })
+            .finally(() => {
+              // החזרת הכפתור למצב הרגיל
+              this.sendVerificationButton.disabled = false;
+              this.sendVerificationButton.textContent = "שלח קוד אימות";
+            });
         }
 
         verifyCode() {
-          // כאן ניתן להוסיף קוד לאימות הקוד שהמשתמש הזין
-          alert("הקוד אומת בהצלחה");
-          this.confirmBookingButton.style.display = "block";
+          const verificationCode = this.verificationCodeInput.value;
+          const email = this.userEmailInput.value;
+
+          if (!verificationCode) {
+            alert("נא להזין את קוד האימות");
+            return;
+          }
+
+          // הצגת אנימציית טעינה
+          this.verifyCodeButton.disabled = true;
+          this.verifyCodeButton.textContent = "מאמת...";
+
+          fetch("https://alontsoran00.pythonanywhere.com/api/verify-code", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: email,
+              code: verificationCode,
+            }),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              if (data.success) {
+                alert("הקוד אומת בהצלחה");
+                this.confirmBookingButton.style.display = "block";
+                this.verificationCodeInput.disabled = true;
+                this.verifyCodeButton.disabled = true;
+
+                // הסרת הטיימר אם קיים
+                const timerDisplay = this.verificationSection.querySelector(
+                  ".verification-timer"
+                );
+                if (timerDisplay) {
+                  timerDisplay.remove();
+                }
+              } else {
+                alert(data.message || "קוד אימות שגוי או שפג תוקפו");
+                this.verifyCodeButton.disabled = false;
+                this.verifyCodeButton.textContent = "אמת קוד";
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("שגיאה בשליחת הבקשה לשרת");
+              this.verifyCodeButton.disabled = false;
+              this.verifyCodeButton.textContent = "אמת קוד";
+            });
         }
 
         async confirmBooking() {
