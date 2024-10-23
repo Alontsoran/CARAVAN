@@ -1543,18 +1543,18 @@
       /* התאמה למובייל */
       @media (max-width: 768px) {
         .fc .fc-col-header-cell-cushion {
-          font-size: 11px;
+          font-size: 10px;
         }
         .fc .fc-timegrid-axis-cushion,
         .fc .fc-timegrid-slot-label-cushion {
-          font-size: 11px;
+          font-size: 10px;
         }
         .header-content {
           flex-direction: column;
           align-items: flex-start;
         }
         .booking-container {
-          font-size: 12px;
+          font-size: 14px;
         }
         .menu-toggle {
           display: block;
@@ -1700,6 +1700,93 @@
         margin-bottom: 20px;
         border-radius: 10px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      .popup-content {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+      }
+
+      .popup-content h3 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: var(--secondary-color);
+        font-family: var(--font-family-heading);
+      }
+
+      .popup-content p {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        margin-bottom: 15px;
+      }
+
+      #selectedHours,
+      #totalPrice {
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+
+      .popup-content input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .popup-content input:focus {
+        outline: none;
+        border-color: var(--accent-color);
+      }
+
+      .popup-content button {
+        width: 100%;
+        padding: 12px;
+        background-color: var(--primary-color);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .popup-content button:hover {
+        background-color: #ff8c5a;
+        transform: translateY(-3px);
+      }
+
+      #verificationSection {
+        margin-top: 20px;
+      }
+
+      #verificationSection input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+      }
+
+      #verificationSection button {
+        background-color: var(--accent-color);
+        color: #fff;
+        border-radius: 50px;
+        transition: background-color 0.3s ease;
+      }
+
+      #verificationSection button:hover {
+        background-color: #39b4a8;
       }
     </style>
   </body>
