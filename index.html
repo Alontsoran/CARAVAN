@@ -793,8 +793,7 @@
             title: "לוז נבחר",
             start: start,
             end: end,
-            backgroundColor: "#4ecdc4", // צבע אחר להדגשה
-            borderColor: "#4ecdc4",
+            classNames: ["selected-slot"],
             editable: false,
             allDay: false,
           });
@@ -2730,13 +2729,110 @@
         content: "\f0c9";
         color: black;
       }
+
+      /* שינוי רקע לוח השנה */
+      .fc {
+        background-color: #f0f8ff; /* צבע כחול בהיר */
+      }
+
+      /* כותרות הימים */
+      .fc .fc-col-header-cell-cushion {
+        color: #ff6b35; /* הצבע הראשי שלך */
+        font-weight: bold;
+      }
+
+      /* היום הנוכחי */
+      .fc .fc-day-today {
+        background-color: #fff5e6; /* צבע כתום בהיר */
+      }
+
+      /* שעות הפעילות */
+      .fc-timegrid-col-frame {
+        background-color: #ffffff;
+      }
+
+      /* קווי הרשת */
+      .fc .fc-scrollgrid {
+        border: 1px solid #ddd;
+      }
+
+      .fc .fc-scrollgrid td,
+      .fc .fc-scrollgrid th {
+        border: 1px solid #ddd;
+      }
+
+      /* אירועים כלליים */
+      .fc .fc-event {
+        background-color: #4ecdc4; /* צבע טורקיז */
+        border: none;
+        color: #fff;
+        border-radius: 4px;
+      }
+
+      /* אירועים לפי סטטוס */
+      .fc-event[data-status="confirmed"] {
+        background-color: #28a745; /* ירוק */
+      }
+
+      .fc-event[data-status="pending"] {
+        background-color: #ffc107; /* צהוב */
+      }
+
+      .fc-event[data-status="cancelled"] {
+        background-color: #dc3545; /* אדום */
+      }
+
+      /* הלוז הנבחר */
+      .fc-event.selected-slot {
+        background-color: #28a745 !important; /* ירוק */
+        border-color: #28a745 !important;
+      }
+
+      /* זמנים לא פעילים */
+      .fc-timegrid-slot.fc-timegrid-slot-lane {
+        background-color: #f0f0f0;
+      }
     </style>
     <script>
-      /* אפקט הצללה לתפריט בעת גלילה */
-      window.addEventListener("scroll", () => {
-        const header = document.querySelector("header");
-        header.classList.toggle("scrolled", window.scrollY > 0);
-      });
+            /* אפקט הצללה לתפריט בעת גלילה */
+            window.addEventListener("scroll", () => {
+              const header = document.querySelector("header");
+              header.classList.toggle("scrolled", window.scrollY > 0);
+            });
+            async fetchEvents(info, successCallback, failureCallback) {
+        if (!this.selectedStudio) {
+          successCallback([]);
+          return;
+        }
+        try {
+          const { data, error } = await this.supabase
+            .from("bookings")
+            .select("*")
+            .eq("studio_id", this.selectedStudio)
+            .gte("start_time", info.startStr)
+            .lte("end_time", info.endStr);
+          if (error) throw error;
+
+          const events = data.map((booking) => ({
+            id: booking.id,
+            title: booking.title || "הזמנה",
+            start: booking.start_time,
+            end: booking.end_time,
+            backgroundColor: this.getEventColor(booking.status),
+            borderColor: this.getEventColor(booking.status),
+            editable: false,
+            allDay: false,
+            extendedProps: {
+              status: booking.status,
+            },
+            classNames: ['booking-event'],
+          }));
+          successCallback(events);
+        } catch (error) {
+          console.error("Error fetching events:", error);
+          failureCallback(error);
+        }
+      }
     </script>
   </body>
 </html>
