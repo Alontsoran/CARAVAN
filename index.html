@@ -307,7 +307,91 @@
         </ul>
       </div>
     </section>
+    <!-- מבין לקוחותינו -->
+    <!-- מבין לקוחותינו -->
+    <section id="clients" class="section">
+      <div class="container">
+        <h2 class="section-title">מבין לקוחותינו</h2>
+        <div class="clients-content">
+          <div class="client-box">
+            <div class="client">
+              <img
+                src="https://ahalanband.co.il/cdn/shop/files/Screenshot_2023-08-12_160549-modified_76x100.png?v=1691845644"
+                alt="לוגו להקת אהלן"
+                class="client-logo"
+              />
+              <h3 class="client-name">להקת אהלן</h3>
+              <!-- עטיפת הנגן בתוך div מעוצב -->
+              <div class="spotify-player">
+                <iframe
+                  src="https://open.spotify.com/embed/artist/7eg4RSeUXMhqwLE9EhTp6I?utm_source=generator&theme=0&view=coverart"
+                  width="100%"
+                  height="80"
+                  frameborder="0"
+                  allowtransparency="true"
+                  allow="encrypted-media"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <style>
+      /* סגנונות לסקשן "מבין לקוחותינו" */
+      #clients {
+        background-color: var(--light-bg);
+        padding: 60px 0;
+      }
 
+      #clients .clients-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .client-box {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        padding: 20px;
+        max-width: 350px;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .client-logo {
+        width: 100px;
+        height: auto;
+        margin-bottom: 15px;
+      }
+
+      .client-name {
+        font-size: 1.5rem;
+        color: var(--secondary-color);
+        margin-bottom: 15px;
+        font-family: var(--font-family-heading);
+      }
+
+      /* סגנונות לנגן ה-Spotify */
+      .spotify-player {
+        margin-top: 10px;
+      }
+
+      .spotify-player iframe {
+        border: none;
+        border-radius: 5px;
+      }
+
+      /* התאמות למובייל */
+      @media (max-width: 768px) {
+        .client-box {
+          max-width: 100%;
+          padding: 15px;
+        }
+      }
+    </style>
     <!-- מחירים -->
     <section id="pricing" class="section">
       <div class="container">
